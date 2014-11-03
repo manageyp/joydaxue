@@ -25,3 +25,7 @@ Stings need to do in production environment.
 . config/secrets key
 
 . config/database connection
+
+=== Website
+
+* http://www.joydaxue.com
