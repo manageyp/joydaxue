@@ -9,6 +9,9 @@
 /test/version_tmp/
 /tmp/
 
+# Ignore lib/tasks
+/lib/tasks/
+
 # Ignore production config
 /config/database.yml
 /config/secrets.yml
