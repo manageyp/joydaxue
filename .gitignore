@@ -9,6 +9,10 @@
 /test/version_tmp/
 /tmp/
 
+# Ignore production config
+/config/database.yml
+/config/secrets.yml
+
 ## Specific to RubyMotion:
 .dat*
 .repl_history
