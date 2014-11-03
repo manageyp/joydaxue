@@ -1,0 +1,26 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+
+
+development:
+  <<: *default
+  username: root
+  password: 'mysql'
+  database: joydaxue_dev
+
+
+test:
+  <<: *default
+  username: root
+  password: 'mysql'
+  database: joydaxue_test
+
+
+# production:
+#   <<: *default
+#   username: root
+#   password: 'mysql'
+#   database: joydaxue_pd

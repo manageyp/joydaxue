@@ -1,0 +1,27 @@
+= Joydaxue project doc
+
+== Description
+
+This is just an idea for making a product to help high school students.
+
+
+=== Things I want to cover:
+
+. Colleges
+
+. Majors
+
+. Classes
+
+. Scores
+
+. Attentions
+
+
+=== Production Config
+
+Stings need to do in production environment.
+
+. config/secrets key
+
+. config/database connection
