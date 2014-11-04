@@ -12,6 +12,7 @@
 # Ignore lib/tasks
 /lib/tasks/
 app/models/mycollege/
+public/photos/
 
 # Ignore production config
 /config/database.yml

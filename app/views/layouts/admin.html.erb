@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/admin/select2.css">
     <link rel="stylesheet" href="/assets/admin/app.v2.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/admin/prettyPhoto.css">
     <!--[if lt IE 9]>
     <script src="/assets/admin/ie/respond.min.js"></script>
     <script src="/assets/admin/ie/html5.js"></script>
@@ -14,6 +15,7 @@
     <script src="/assets/admin/app.v2.js"></script>
     <!-- select2 -->
     <script src="/assets/admin/select2.min.js"></script>
+    <script src="/assets/admin/jquery.prettyPhoto.js"></script>
     <script src="/assets/admin/util.js"></script>
     <%= csrf_meta_tags %>
     <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico" />
@@ -51,12 +53,18 @@
       });
 
       $(document).ready(function () {
+        // photo gallery
+        $('a[rel^="prettyPhoto"]').prettyPhoto({
+            slideshow: 5000,
+            autoplay_slideshow: false
+        });
+
+        // validate input file
         $('input[type="file"]').change(function () {
           var isValidFile = CheckExtension(this);
           if(isValidFile){
             isValidFile = validateFileSize(this);
           }
-
           if(isValidFile){
             $('button[type="submit"]').removeAttr('disabled');
           }else{

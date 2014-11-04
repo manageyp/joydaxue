@@ -6,6 +6,19 @@
         <table class="table table-striped m-b-none text-small">
           <tbody>
             <tr><th width="150">名称:</th><td class="text-left"><%= @record.name %></td></tr>
+            <tr><th>图片：</th>
+              <td class="text-left">
+                <% if @record.avatar %>
+                  <div class="item">
+                    <a href="<%= @record.avatar %>" rel="prettyPhoto" class="item-media">
+                      <img src="<%= @record.avatar %>" style="max-width:200px;">
+                    </a>
+                  </div>
+                <% else %>
+                  无封面图
+                <% end %>
+              </td>
+            </tr>
           </tbody>
           <tfoot>
               <tr>
@@ -19,3 +32,16 @@
     </section>
    </div>
 </section>
+
+<script type="text/javascript">
+  //<![CDATA[
+  $(document).ready(function(){
+
+    $('a[rel^="prettyPhoto"]').prettyPhoto({
+        slideshow: 5000,
+        autoplay_slideshow: false
+    });
+
+  });
+  //]]>
+</script>
