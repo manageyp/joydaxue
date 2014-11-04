@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103080353) do
+ActiveRecord::Schema.define(version: 20141104110131) do
 
   create_table "cities", force: true do |t|
     t.integer  "province_id", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20141103080353) do
     t.string   "address"
     t.string   "college_type"
     t.string   "telephone"
+    t.string   "avatar"
     t.string   "website"
     t.string   "found_year"
     t.string   "zipcode"

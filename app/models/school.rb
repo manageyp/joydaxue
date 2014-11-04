@@ -6,6 +6,7 @@ class School < ActiveRecord::Base
     city_id: "所属城市",
     name: "名称",
     address: "地址",
+    avatar: "头像",
 
     college_type: "院校类别",
     telephone: "联系电话",
