@@ -5,8 +5,8 @@
         <header class="panel-heading"><%= resource_name %>详情</header>
         <table class="table table-striped m-b-none text-small">
           <tbody>
-            <tr><th width="150">名称:</th><td class="text-left"><%= @record.name %></td></tr>
-            <tr><th>图片：</th>
+            <tr><th width="150">名称</th><td class="text-left"><%= @record.name %></td></tr>
+            <tr><th>图片</th>
               <td class="text-left">
                 <% if @record.avatar %>
                   <div class="item">
@@ -19,6 +19,8 @@
                 <% end %>
               </td>
             </tr>
+            <tr><th width="150">简述</th><td class="text-left"><%= @introduction.short_content %></td></tr>
+            <tr><th width="150">学校详细描述</th><td class="text-left"><%= @introduction.full_content %></td></tr>
           </tbody>
           <tfoot>
               <tr>

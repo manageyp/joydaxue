@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104110131) do
+ActiveRecord::Schema.define(version: 20141104123031) do
 
   create_table "cities", force: true do |t|
     t.integer  "province_id", null: false
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20141104110131) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "school_introductions", force: true do |t|
+    t.integer  "school_id",     null: false
+    t.string   "short_content"
+    t.text     "full_content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "school_introductions", ["school_id"], name: "index_school_introductions_on_school_id", using: :btree
 
   create_table "schools", force: true do |t|
     t.integer  "province_id",                                               null: false

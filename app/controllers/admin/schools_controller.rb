@@ -15,6 +15,7 @@ module Admin
     end
 
     def show
+      @introduction = @record.school_introduction
     end
 
     def edit
