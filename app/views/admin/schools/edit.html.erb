@@ -1,0 +1,25 @@
+<div class="bg clearfix padder m-b">
+  <h3>编辑 <%= @record.name %></h3>
+</div>
+
+<section class="col-lg-8">
+    <div class="panel-body">
+      <%= form_for([:admin, @record], html: {class: "form-horizontal", id: "ticket-type-1"}) do |f| %>
+          <%= f.hidden_field :id %>
+          <div class="form-group" id="ticket-name">
+            <label class="col-lg-3 control-label">学校名称<span>*</span></label>
+            <div class="col-lg-9">
+              <%= f.text_field :name, class: "form-control", placeholder: "输入主题名称", data: {required: "true"} %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-lg-9 col-lg-offset-3">
+              <a href="/admin/schools" class="btn btn-white">取消</a>&nbsp;&nbsp;
+              <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+          </div>
+
+      <% end %>
+    </div>
+</section>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= header_notice %></title>
+    <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/admin/select2.css">
+    <link rel="stylesheet" href="/assets/admin/app.v2.css" type="text/css" />
+    <!--[if lt IE 9]>
+    <script src="/assets/admin/ie/respond.min.js"></script>
+    <script src="/assets/admin/ie/html5.js"></script>
+    <![endif]-->
+    <script src="/assets/admin/app.v2.js"></script>
+    <!-- select2 -->
+    <script src="/assets/admin/select2.min.js"></script>
+    <script src="/assets/admin/util.js"></script>
+    <%= csrf_meta_tags %>
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico" />
+  </head>
+  <body>
+    <!-- header -->
+    <%= render "/admin/common/header" %>
+    <!-- / header -->
+
+    <!-- nav -->
+    <%= render "/admin/common/nav" %>
+    <!-- / nav -->
+
+    <!-- notice -->
+    <%= render "/admin/common/notice" %>
+    <!-- / notice -->
+
+    <section id="content" class="content-sidebar bg-white">
+      <%= yield %>
+    </section>
+    <!-- footer -->
+    <footer id="footer">
+      <div class="text-center padder clearfix">
+        <p> <small>&copy; 2014 Joydaxue.com 后台</small>
+        </p>
+      </div>
+    </footer>
+    <!-- / footer -->
+
+    <script type="text/javascript">
+      //<![CDATA[
+      $(document).ajaxSend(function(e, xhr, options) {
+        var token = $("meta[name='csrf-token']").attr("content");
+        xhr.setRequestHeader("X-CSRF-Token", token);
+      });
+
+      $(document).ready(function () {
+        $('input[type="file"]').change(function () {
+          var isValidFile = CheckExtension(this);
+          if(isValidFile){
+            isValidFile = validateFileSize(this);
+          }
+
+          if(isValidFile){
+            $('button[type="submit"]').removeAttr('disabled');
+          }else{
+            $('button[type="submit"]').attr('disabled','disabled');
+          }
+        });
+      });
+      //]]>
+    </script>
+
+  </body>
+</html>

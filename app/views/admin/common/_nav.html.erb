@@ -1,0 +1,36 @@
+<nav id="nav" class="nav-primary hidden-xs nav-vertical">
+  <div class="panel-group m-b" id="accordion2">
+
+    <div class="panel">
+
+      <div class="panel-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapsetopic">学校库
+          <b class="caret hidden-xs-only"></b>
+        </a>
+      </div>
+      <div id="collapsetopic" class="panel-collapse collapse <%= active_collapse(['schools']) %>">
+        <div class="text-small">
+          <ul class="nav">
+            <li><a href="/admin/schools" class="<%= active_css('schools')%>"><span>学校管理</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="panel-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseuser">系统账户
+          <b class="caret hidden-xs-only"></b>
+        </a>
+      </div>
+      <div id="collapseuser" class="panel-collapse collapse <%= active_collapse(['users']) %>">
+        <div class="text-small">
+          <ul class="nav">
+            <li><a href="/admin/users" class="<%= active_css('users')%>"><span>用户列表</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</nav>
