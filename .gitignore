@@ -11,6 +11,7 @@
 
 # Ignore lib/tasks
 /lib/tasks/
+app/models/mycollege/
 
 # Ignore production config
 /config/database.yml
