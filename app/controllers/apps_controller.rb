@@ -1,5 +1,5 @@
 class AppsController < ApplicationController
-  layout false
+  layout 'flatui'
 
   def index
   end
