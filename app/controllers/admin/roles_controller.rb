@@ -1,17 +1,17 @@
 # -*- encoding : utf-8 -*-
 
 module Admin
-  class UsersController < BaseController
+  class RolesController < BaseController
     before_action :fetch_record, only: [:show, :edit, :update]
 
     def index
       parse_pagination
-      @search = User.ransack(params[:q])
+      @search = Role.ransack(params[:q])
       @records = @search.result.page(@page)
     end
 
     def new
-      @record = User.new
+      @record = Role.new
     end
 
     def show
@@ -21,14 +21,14 @@ module Admin
     end
 
     def update
-      if @record.refresh_user(protect_params)
+      if @record.refresh_role(protect_params)
         flash[:notice] = '修改成功'
         render action: 'show' and return
       end
     end
 
     def create
-      @record = User.build_user(protect_params)
+      @record = Role.build_role(protect_params)
       if @record
         flash[:notice] = '添加成功'
         render action: 'show'
@@ -38,7 +38,7 @@ module Admin
     end
 
     # def destroy
-    #   @record = User.find_by_id(params[:id])
+    #   @record = Role.find_by_id(params[:id])
     #   if @record && @record.destroy
     #     render text: 'success' and return
     #   else
@@ -48,7 +48,7 @@ module Admin
 
     private
       def fetch_record
-        @record = User.find_by_id(params[:id])
+        @record = Role.find_by_id(params[:id])
         unless @record
           flash[:notice] = "记录不存在！"
           redirect_to admin_users_path and return
@@ -56,8 +56,7 @@ module Admin
       end
 
       def protect_params
-        params.require(:user).permit(:name, :email, :cellphone, :display_name,
-          :sex, :status)
+        params.require(:role).permit(:name, :description, :status)
       end
 
   end

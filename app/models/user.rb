@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
     memo: "备注"
   }
 
-  def refresh_info(params)
+  def refresh_user(params)
     self.name = params[:name] if params[:name].present?
     self.email = params[:email] if params[:email].present?
     self.cellphone = params[:cellphone] if params[:cellphone].present?
@@ -27,9 +27,9 @@ class User < ActiveRecord::Base
 
   class << self
 
-    def build(params)
-      user = User.new(params)
-      user if user.save
+    def build_user(params)
+      record = User.new(params)
+      record if record.save
     end
 
   end

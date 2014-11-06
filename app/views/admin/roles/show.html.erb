@@ -6,16 +6,13 @@
         <table class="table table-striped m-b-none text-small">
           <tbody>
             <tr><th width="150">名称</th><td class="text-left"><%= @record.name %></td></tr>
-            <tr><th width="150">性别</th><td class="text-left"><%= @record.sex_word %></td></tr>
-            <tr><th width="150">邮箱</th><td class="text-left"><%= @record.email %></td></tr>
-            <tr><th width="150">手机号</th><td class="text-left"><%= @record.cellphone %></td></tr>
-            <tr><th width="150">姓名</th><td class="text-left"><%= @record.display_name %></td></tr>
+            <tr><th width="150">描述</th><td class="text-left"><%= @record.description %></td></tr>
             <tr><th width="150">状态</th><td class="text-left"><%= @record.status_word %></td></tr>
           </tbody>
           <tfoot>
               <tr>
                 <th class="row" colspan="2">
-                  <a class="btn btn-inverse" href="/admin/users/">返回列表</a>
+                  <a class="btn btn-inverse" href="/admin/roles/">返回列表</a>
                 </th>
               </tr>
             </tfoot>

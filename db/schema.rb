@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20141106011258) do
   create_table "roles", force: true do |t|
     t.string   "name"
     t.string   "description"
-    t.integer  "status"
+    t.integer  "status",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

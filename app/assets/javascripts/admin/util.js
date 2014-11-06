@@ -135,3 +135,31 @@ function validateFileSize(e) {
     return isValidFile;
 }
 
+// for Ajax auto-add csrf-token
+$(document).ajaxSend(function(e, xhr, options) {
+  var token = $("meta[name='csrf-token']").attr("content");
+  xhr.setRequestHeader("X-CSRF-Token", token);
+});
+
+// to init js
+$(document).ready(function () {
+  // photo gallery
+  $('a[rel^="prettyPhoto"]').prettyPhoto({
+      slideshow: 5000,
+      autoplay_slideshow: false
+  });
+
+  // validate input file
+  $('input[type="file"]').change(function () {
+    var isValidFile = CheckExtension(this);
+    if(isValidFile){
+      isValidFile = validateFileSize(this);
+    }
+    if(isValidFile){
+      $('button[type="submit"]').removeAttr('disabled');
+    }else{
+      $('button[type="submit"]').attr('disabled','disabled');
+    }
+  });
+
+});
