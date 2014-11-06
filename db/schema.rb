@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141105093831) do
+ActiveRecord::Schema.define(version: 20141106010216) do
 
   create_table "captchas", force: true do |t|
     t.string   "captcha_type",             null: false
@@ -105,6 +105,20 @@ ActiveRecord::Schema.define(version: 20141105093831) do
   add_index "schools", ["is_edu_affiliate"], name: "index_schools_on_is_edu_affiliate", using: :btree
   add_index "schools", ["name"], name: "index_schools_on_name", using: :btree
   add_index "schools", ["province_id"], name: "index_schools_on_province_id", using: :btree
+
+  create_table "user_devices", force: true do |t|
+    t.integer  "user_id"
+    t.string   "client_type"
+    t.integer  "device_id"
+    t.string   "device_name"
+    t.string   "device_agent"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_devices", ["client_type"], name: "index_user_devices_on_client_type", using: :btree
+  add_index "user_devices", ["device_id"], name: "index_user_devices_on_device_id", using: :btree
+  add_index "user_devices", ["user_id"], name: "index_user_devices_on_user_id", using: :btree
 
   create_table "user_roles", force: true do |t|
     t.integer  "user_id",    null: false
