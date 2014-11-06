@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106010216) do
+ActiveRecord::Schema.define(version: 20141106011258) do
+
+  create_table "access_tokens", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "token",      null: false
+    t.datetime "expired_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "access_tokens", ["token"], name: "index_access_tokens_on_token", unique: true, using: :btree
+  add_index "access_tokens", ["user_id"], name: "index_access_tokens_on_user_id", unique: true, using: :btree
 
   create_table "captchas", force: true do |t|
     t.string   "captcha_type",             null: false
@@ -107,9 +118,9 @@ ActiveRecord::Schema.define(version: 20141106010216) do
   add_index "schools", ["province_id"], name: "index_schools_on_province_id", using: :btree
 
   create_table "user_devices", force: true do |t|
-    t.integer  "user_id"
-    t.string   "client_type"
-    t.integer  "device_id"
+    t.integer  "user_id",      null: false
+    t.string   "client_type",  null: false
+    t.integer  "device_id",    null: false
     t.string   "device_name"
     t.string   "device_agent"
     t.datetime "created_at"
