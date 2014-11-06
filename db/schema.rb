@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104123031) do
+ActiveRecord::Schema.define(version: 20141105093831) do
+
+  create_table "captchas", force: true do |t|
+    t.string   "captcha_type",             null: false
+    t.string   "mobile",                   null: false
+    t.integer  "send_count",   default: 0
+    t.string   "code",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "captchas", ["captcha_type", "mobile"], name: "index_captchas_on_captcha_type_and_mobile", unique: true, using: :btree
 
   create_table "cities", force: true do |t|
     t.integer  "province_id", null: false
@@ -23,8 +34,26 @@ ActiveRecord::Schema.define(version: 20141104123031) do
   add_index "cities", ["name"], name: "index_cities_on_name", using: :btree
   add_index "cities", ["province_id"], name: "index_cities_on_province_id", using: :btree
 
+  create_table "permissions", force: true do |t|
+    t.integer  "role_id",         null: false
+    t.string   "controller_name"
+    t.string   "action_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "permissions", ["role_id"], name: "index_permissions_on_role_id", using: :btree
+
   create_table "provinces", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,5 +105,31 @@ ActiveRecord::Schema.define(version: 20141104123031) do
   add_index "schools", ["is_edu_affiliate"], name: "index_schools_on_is_edu_affiliate", using: :btree
   add_index "schools", ["name"], name: "index_schools_on_name", using: :btree
   add_index "schools", ["province_id"], name: "index_schools_on_province_id", using: :btree
+
+  create_table "user_roles", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "role_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
+  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "name",                     null: false
+    t.string   "email",                    null: false
+    t.string   "cellphone",                null: false
+    t.string   "display_name"
+    t.integer  "sex"
+    t.integer  "status",       default: 0
+    t.string   "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["cellphone"], name: "index_users_on_cellphone", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
 
 end
