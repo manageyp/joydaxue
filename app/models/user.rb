@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
+  include Util::CommonFields
 
   scope :active, -> { where(status: 0) }
-
 
   ModelName = "用户"
   ColumnNames = {
@@ -13,25 +13,6 @@ class User < ActiveRecord::Base
     status: "状态",
     memo: "备注"
   }
-
-
-  STATUS_CODES = {
-    0 => '正常',
-    1 => '锁定'
-  }
-
-  SEX_TYPES = {
-    0 => "女",
-    1 => "男"
-  }
-
-  def sex_word
-    SEX_TYPES[sex]
-  end
-
-  def status_word
-    STATUS_CODES[status]
-  end
 
   def refresh_info(params)
     self.name = params[:name] if params[:name].present?

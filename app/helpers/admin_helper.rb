@@ -71,11 +71,11 @@ module AdminHelper
     ret.join(" ").html_safe
   end
 
-  def status_info(status)
-    if status
-      "<span class='label bg-success'>上线</span>".html_safe
+  def status_info(record)
+    if record.status == 0
+      "<span class='label bg-success'>#{record.status_word}</span>".html_safe
     else
-      "<span class='label bg-danger'>下线</span>".html_safe
+      "<span class='label bg-danger'>#{record.status_word}</span>".html_safe
     end
   end
 

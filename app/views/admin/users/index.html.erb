@@ -41,7 +41,7 @@
                   <td><%= record.cellphone %></td>
                   <td><%= record.sex_word %></td>
                   <td><%= record.display_name %></td>
-                  <td><%= record.status_word %></td>
+                  <td><%= status_info(record) %></td>
                   <td><%= chinese_datetime(record.created_at) %></td>
                   <td>
                     <a href="/admin/users/<%= record.id %>" title="查看详情"><i class="fa fa-tag"></i></a>

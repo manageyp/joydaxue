@@ -11,7 +11,7 @@
           <div class="form-group" id="ticket-display_name">
             <label class="col-lg-3 control-label">性别<span>*</span></label>
             <div class="col-lg-9">
-              <%= select_tag "user[sex]", select_tag_options_for(User::SEX_TYPES, selected: 0, name: "选择性别"), {class: "form-control"} %>
+              <%= select_tag "user[sex]", select_tag_options_for(Util::CommonFields::SEX_TYPES, selected: 0, name: "选择性别"), {class: "form-control"} %>
             </div>
           </div>
 
