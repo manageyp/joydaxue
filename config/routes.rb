@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resources :apps, only: [:index]
 
   namespace :admin do
-    resources :schools
+    resources :schools, :users
   end
 end

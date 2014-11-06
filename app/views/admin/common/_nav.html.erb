@@ -18,14 +18,18 @@
 
 
       <div class="panel-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseuser">系统账户
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseuser">用户模块
           <b class="caret hidden-xs-only"></b>
         </a>
       </div>
       <div id="collapseuser" class="panel-collapse collapse <%= active_collapse(['users']) %>">
         <div class="text-small">
           <ul class="nav">
-            <li><a href="/admin/users" class="<%= active_css('users')%>"><span>用户列表</span></a></li>
+            <li><a href="/admin/users" class="<%= active_css('users')%>"><span>用户管理</span></a></li>
+            <li><a href="/admin/roles" class="<%= active_css('roles')%>"><span>角色管理</span></a></li>
+            <li><a href="/admin/user_roles" class="<%= active_css('user_roles')%>"><span>角色分配</span></a></li>
+            <li><a href="/admin/permissions" class="<%= active_css('permissions')%>"><span>权限配置</span></a></li>
+            <li><a href="/admin/user_devices" class="<%= active_css('user_devices')%>"><span>用户设备</span></a></li>
           </ul>
         </div>
       </div>

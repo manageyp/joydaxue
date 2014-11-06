@@ -7,12 +7,12 @@
           <div class="row text-small">
             <%= search_form_for([:admin, @search], id: 'searchForm') do |f| %>
               <div class="col-sm-2">
-                <%= f.text_field(:name_cont, placeholder: "学校名称", class: "form-control" ) %>
+                <%= f.text_field(:name_cont, placeholder: "用户名", class: "form-control" ) %>
               </div>
               &nbsp;&nbsp;
               <%= f.submit "查询", class: "btn btn-sm btn-white" %>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <a class="btn btn-success btn-sm" href="/admin/schools/new"><i class="fa fa-plus"></i>添加<%= resource_name %></a>
+              <a class="btn btn-success btn-sm" href="/admin/users/new"><i class="fa fa-plus"></i>添加<%= resource_name %></a>
             <% end %>
           </div>
         </div>
@@ -22,6 +22,11 @@
             <tr>
               <th>编号</th>
               <th>名称</th>
+              <th>邮箱</th>
+              <th>手机号</th>
+              <th>性别</th>
+              <th>姓名</th>
+              <th>状态</th>
               <th>创建时间</th>
               <th>操作</th>
             </tr>
@@ -31,11 +36,16 @@
               <% @records.each do |record| %>
                 <tr  id="record_<%= record.id %>">
                   <td><%= record.id %></td>
-                  <td><a href="/admin/schools/<%= record.id %>" title="查看详情"><%= record.name %></a></td>
+                  <td><a href="/admin/users/<%= record.id %>" title="查看详情"><%= record.name %></a></td>
+                  <td><%= record.email %></td>
+                  <td><%= record.cellphone %></td>
+                  <td><%= record.sex_word %></td>
+                  <td><%= record.display_name %></td>
+                  <td><%= record.status_word %></td>
                   <td><%= chinese_datetime(record.created_at) %></td>
                   <td>
-                    <a href="/admin/schools/<%= record.id %>" title="查看详情"><i class="fa fa-tag"></i></a>
-                    <a href="/admin/schools/<%= record.id %>/edit" title="编辑"><i class="fa fa-edit"></i></a>
+                    <a href="/admin/users/<%= record.id %>" title="查看详情"><i class="fa fa-tag"></i></a>
+                    <a href="/admin/users/<%= record.id %>/edit" title="编辑"><i class="fa fa-edit"></i></a>
                   </td>
                 </tr>
               <% end %>

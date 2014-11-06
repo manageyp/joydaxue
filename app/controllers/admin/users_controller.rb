@@ -1,21 +1,20 @@
 # -*- encoding : utf-8 -*-
 
 module Admin
-  class SchoolsController < BaseController
+  class UsersController < BaseController
     before_action :fetch_record, only: [:show, :edit, :update]
 
     def index
       parse_pagination
-      @search = School.ransack(params[:q])
+      @search = User.ransack(params[:q])
       @records = @search.result.page(@page)
     end
 
     def new
-      @record = School.new
+      @record = User.new
     end
 
     def show
-      @introduction = @record.school_introduction
     end
 
     def edit
@@ -29,8 +28,9 @@ module Admin
     end
 
     def create
-      @record = School.build(protect_params)
+      @record = User.build(protect_params)
       if @record
+        flash[:notice] = '添加成功'
         render action: 'show'
       else
         render action: 'new'
@@ -38,7 +38,7 @@ module Admin
     end
 
     # def destroy
-    #   @record = School.find_by_id(params[:id])
+    #   @record = User.find_by_id(params[:id])
     #   if @record && @record.destroy
     #     render text: 'success' and return
     #   else
@@ -48,15 +48,16 @@ module Admin
 
     private
       def fetch_record
-        @record = School.find_by_id(params[:id])
+        @record = User.find_by_id(params[:id])
         unless @record
           flash[:notice] = "记录不存在！"
-          redirect_to admin_schools_path and return
+          redirect_to admin_users_path and return
         end
       end
 
       def protect_params
-        params.require(:school).permit(:name)
+        params.require(:user).permit(:name, :email, :cellphone, :display_name,
+          :sex, :status)
       end
 
   end
