@@ -1,6 +1,8 @@
 class Role < ActiveRecord::Base
   include Util::CommonFields
 
+  has_many :user_roles
+
   scope :active, -> { where(status: 0) }
 
   ModelName = "角色"
@@ -25,4 +27,5 @@ class Role < ActiveRecord::Base
     end
 
   end
+
 end

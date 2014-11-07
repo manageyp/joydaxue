@@ -1,0 +1,35 @@
+<section class="col-lg-8">
+    <div class="panel-body">
+      <%= form_for([:admin, @record], html: {class: "form-horizontal", id: "ticket-type-1"}) do |f| %>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">所属角色:</label>
+            <div class="col-lg-4">
+              <%= f.collection_select(:role_id, Role.select("id,name").order("id desc"), :id, :name, {prompt: "选择角色"}, {id: "select2-option", style: "width:268px"}) %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">所属用户:</label>
+            <div class="col-lg-4">
+              <%= f.collection_select(:user_id, User.select("id,name").order("id desc"), :id, :name, {prompt: "选择用户"}, {id: "select3-option", style: "width:268px"}) %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-lg-9 col-lg-offset-3">
+              <a href="/admin/user_roles" class="btn btn-white">取消</a>&nbsp;&nbsp;
+              <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+          </div>
+
+      <% end %>
+    </div>
+</section>
+
+<script type="text/javascript">
+  //<![CDATA[
+  $(document).ready(function(){
+    $("#select3-option").select2();
+  });
+  //]]>
+</script>

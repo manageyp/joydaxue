@@ -7,7 +7,7 @@
           <div class="row text-small">
             <%= search_form_for([:admin, @search], id: 'searchForm') do |f| %>
               <div class="col-sm-2">
-                <%= f.text_field(:name_cont, placeholder: "学校名称", class: "form-control" ) %>
+                <%= f.text_field(:name_cont, placeholder: "名称", class: "form-control" ) %>
               </div>
               &nbsp;&nbsp;
               <%= f.submit "查询", class: "btn btn-sm btn-white" %>

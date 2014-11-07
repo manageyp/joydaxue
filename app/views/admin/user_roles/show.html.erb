@@ -1,0 +1,22 @@
+<section class="main padder">
+  <div class="row">
+    <section class="col-lg-12">
+      <div class="panel m-t">
+        <header class="panel-heading"><%= resource_name %>详情</header>
+        <table class="table table-striped m-b-none text-small">
+          <tbody>
+            <tr><th width="150">角色名称</th><td class="text-left"><%= @record.role.name if @record.role %></td></tr>
+            <tr><th width="150">用户名称</th><td class="text-left"><%= @record.user.name if @record.user %></td></tr>
+          </tbody>
+          <tfoot>
+              <tr>
+                <th class="row" colspan="2">
+                  <a class="btn btn-inverse" href="/admin/user_roles/">返回列表</a>
+                </th>
+              </tr>
+            </tfoot>
+        </table>
+      </div>
+    </section>
+   </div>
+</section>

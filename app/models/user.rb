@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Util::CommonFields
 
+  has_one :user_role
+
   scope :active, -> { where(status: 0) }
 
   ModelName = "用户"

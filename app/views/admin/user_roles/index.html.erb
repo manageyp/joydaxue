@@ -1,0 +1,71 @@
+<section class="main padder">
+  <div class="row">
+    <section class="col-lg-12">
+      <div class="panel m-t">
+        <header class="panel-heading"><%= resource_name %>列表</header>
+        <div class="panel-body">
+          <div class="row text-small">
+            <%= search_form_for([:admin, @search], id: 'searchForm') do |f| %>
+              <span style="margin-left:10px;">所属角色：</span>
+              <label>
+                <%= f.collection_select(:role_id_eq, Role.select("id,name").order("id desc"), :id, :name, {prompt: "选择角色"}, {id: "select2-option", style: "width:268px"}) %>
+              </label>
+              <span style="margin-left:10px;">所属用户：</span>
+              <label>
+                <%= f.collection_select(:user_id_eq, User.select("id,name").order("id desc"), :id, :name, {prompt: "选择用户"}, {id: "select3-option", style: "width:268px"}) %>
+              </label>
+              &nbsp;&nbsp;
+              <%= f.submit "查询", class: "btn btn-sm btn-white" %>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <a class="btn btn-success btn-sm" href="/admin/user_roles/new"><i class="fa fa-plus"></i>添加<%= resource_name %></a>
+            <% end %>
+          </div>
+        </div>
+
+        <table class="table table-striped m-b-none text-small">
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>角色名称</th>
+              <th>用户名称</th>
+              <th>创建时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @records && @records.size > 0 %>
+              <% @records.each do |record| %>
+                <tr  id="record_<%= record.id %>">
+                  <td><%= record.id %></td>
+                  <td><a href="/admin/roles/<%= record.role_id %>" title="查看角色详情"><%= record.role.name if record.role %></a></td>
+                  <td><a href="/admin/users/<%= record.user_id %>" title="查看用户详情"><%= record.user.name if record.user %></a></td>
+                  <td><%= chinese_datetime(record.created_at) %></td>
+                  <td>
+                    <a href="/admin/user_roles/<%= record.id %>" title="查看详情"><i class="fa fa-tag"></i></a>
+                    <a href="/admin/user_roles/<%= record.id %>/edit" title="编辑"><i class="fa fa-edit"></i></a>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="10">无<%= resource_name %>数据</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <% if @records && @records.size > 0 %>
+        <%= paginate @records %>
+      <% end %>
+    </section>
+  </div>
+</section>
+
+<script type="text/javascript">
+  //<![CDATA[
+  $(document).ready(function(){
+    $("#select3-option").select2();
+  });
+  //]]>
+</script>
