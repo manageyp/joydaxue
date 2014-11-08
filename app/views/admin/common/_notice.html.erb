@@ -1,4 +1,4 @@
-<div class="alert alert-warning alert-block m-t m-b-none" style="display:<%= noticeDisplay(flash[:notice]) %>" id="noticeDialog">
+<div class="alert alert-warning alert-block m-t m-b-none" style="display:<%= notice_display(flash[:notice]) %>" id="noticeDialog">
   <button type="button" class="close" onclick="$('.alert').hide();"><i class="fa fa-times"></i></button>
   <h4 style="float:left"><i class="fa fa-bell-o"></i>友情提示：</h4>
   <p id="noticeContent"><%= flash[:notice] %></p>

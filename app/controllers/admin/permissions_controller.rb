@@ -9,9 +9,8 @@ module Admin
     end
 
     def create
-      @role_id_value = params[:role_id]
       prepare_search_form
-      Permission.build_permissions(params[:role_id], params[:action_names])
+      Permission.build_permissions(@role_id_value, params[:action_names])
       @admin_routes = Util::AdminResources.admin_routes(true)
       flash[:notice] = '权限配置成功'
       render action: 'index'
@@ -20,6 +19,7 @@ module Admin
     private
       def prepare_search_form
         parse_pagination
+        @role_id_value = params[:q][:role_id_eq] if params[:q]
         @search = Permission.ransack(params[:q])
         @records = @search.result.page(@page)
       end

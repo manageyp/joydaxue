@@ -28,11 +28,11 @@
           </thead>
           <tbody>
             <tr>
-              <td><label class="control-label">All</label></td>
+              <td><label class="control-label">all</label></td>
               <td>
                 <div class="checkbox">
                   <label class="checkbox-custom">
-                    <input type="checkbox" class="checkbox" name="controllers_all"><i class="fa fa-check-square-o checked"></i> All
+                    <%= permission_checkbox(@role_id_value, 'controllers', 'all') %>
                   </label>
                 </div>
               </td>
@@ -45,10 +45,12 @@
                   <td>
                     <div class="checkbox-group">
                       <label class="checkbox-custom">
-                        <input type="checkbox" class="checkbox" name="<%= controller_name %>_all"><i class="fa fa-check-square-o checked"></i> All
+                       <%= permission_checkbox(@role_id_value, controller_name, 'all') %>
                       </label>
                       <% action_names.each_with_index do |name, index| %>
-                        <label class="checkbox-custom"><input type="checkbox"  class="checkbox" name="<%= controller_name %>_<%= name %>"><i class="fa fa-check-square-o"></i> <%= name %></label>
+                        <label class="checkbox-custom">
+                          <%= permission_checkbox(@role_id_value, controller_name, name) %>
+                        </label>
                       <% end %>
                     </div>
                   </td>
@@ -79,7 +81,7 @@
         $.ajax({
           url: "/admin/permissions",
           type: 'POST',
-          data:{"action_names":checkedValues, "role_id":role_id},
+          data:{"action_names":checkedValues, "q[role_id_eq]":role_id},
           success: function(result) {
             showNotice("权限配置成功");
           },

@@ -15,10 +15,15 @@ class Permission < ActiveRecord::Base
   end
 
   class << self
+    def is_checked(role_id, controller_name, action_name)
+      record = where(role_id: role_id, controller_name: controller_name).first
+      record && record.action_names.index(action_name)
+    end
+
     def parse_action_names(action_names)
       controllers = {}
       action_names.each do |action_name|
-        controller_name, action_name = action_name.split('_')
+        controller_name, action_name = action_name.split('-')
         if controllers.has_key?(controller_name)
           controllers[controller_name] << ";#{action_name}"
         else

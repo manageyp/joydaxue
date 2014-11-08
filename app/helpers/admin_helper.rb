@@ -83,8 +83,16 @@ module AdminHelper
     link_to("查看修改历史", "javascript:void(0)", onclick: "showChangeLog('#{url}')", title: "查看修改历史")
   end
 
-  def noticeDisplay(content)
+  def notice_display(content)
     content.present? ? 'block' : 'none'
+  end
+
+  def permission_checkbox(role_id, controller_name, action_name)
+    if role_id.present? && Permission.is_checked(role_id, controller_name, action_name)
+      checked = "checked"
+      checked_attribute = "checked='checked'"
+    end
+    "<input type='checkbox' #{checked_attribute} class='checkbox' name='#{controller_name}-#{action_name}'><i class='fa fa-check-square-o #{checked}'></i> #{action_name}".html_safe
   end
 
 end
