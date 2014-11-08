@@ -48,12 +48,12 @@ ActiveRecord::Schema.define(version: 20141106011258) do
   create_table "permissions", force: true do |t|
     t.integer  "role_id",         null: false
     t.string   "controller_name"
-    t.string   "action_name"
+    t.string   "action_names"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "permissions", ["role_id"], name: "index_permissions_on_role_id", using: :btree
+  add_index "permissions", ["role_id", "controller_name"], name: "index_permissions_on_role_id_and_controller_name", using: :btree
 
   create_table "provinces", force: true do |t|
     t.string   "name"

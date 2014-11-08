@@ -3,11 +3,11 @@ class CreatePermissions < ActiveRecord::Migration
     create_table :permissions do |t|
       t.integer :role_id, null: false
       t.string :controller_name
-      t.string :action_name
+      t.string :action_names
 
       t.timestamps
     end
 
-    add_index :permissions, :role_id
+    add_index :permissions, [:role_id, :controller_name]
   end
 end

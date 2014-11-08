@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
 module AdminHelper
-  include Util::AdminResources
 
   def resource_name
     name = controller.controller_name
-    RESOURCES[name.to_sym] if name.present?
+    Util::AdminResources::RESOURCES[name.to_sym] if name.present?
   end
 
   def header_notice
@@ -82,6 +81,10 @@ module AdminHelper
   def change_log_button(detail)
     url = "/admin/change_logs?detail_type=#{detail.class.name}&detail_id=#{detail.id}"
     link_to("查看修改历史", "javascript:void(0)", onclick: "showChangeLog('#{url}')", title: "查看修改历史")
+  end
+
+  def noticeDisplay(content)
+    content.present? ? 'block' : 'none'
   end
 
 end

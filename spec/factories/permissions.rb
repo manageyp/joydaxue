@@ -5,6 +5,6 @@ FactoryGirl.define do
     id 1
     role_id 1
     controller_name "MyString"
-    action_name "MyString"
+    action_names "MyString"
   end
 end

@@ -1,7 +1,5 @@
-<% if flash[:notice] %>
-  <div class="alert alert-warning alert-block m-t m-b-none">
-    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-    <h4 style="float:left"><i class="fa fa-bell-o"></i>友情提示：</h4>
-    <p><%= flash[:notice] %></p>
-  </div>
-<% end %>
+<div class="alert alert-warning alert-block m-t m-b-none" style="display:<%= noticeDisplay(flash[:notice]) %>" id="noticeDialog">
+  <button type="button" class="close" onclick="$('.alert').hide();"><i class="fa fa-times"></i></button>
+  <h4 style="float:left"><i class="fa fa-bell-o"></i>友情提示：</h4>
+  <p id="noticeContent"><%= flash[:notice] %></p>
+</div>

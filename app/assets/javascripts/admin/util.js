@@ -1,3 +1,9 @@
+// 显示提醒信息
+function showNotice(content){
+  $("#noticeContent").html(content);
+  $("#noticeDialog").show();
+}
+
 // 点击查看修改历史
 function showChangeLog(url){
   $.ajax({
