@@ -1,0 +1,10 @@
+development:
+  website: http://localhost:3000
+
+
+test:
+  website: http://localhost:3000
+
+
+production:
+  website: http://www.joydaxue.com

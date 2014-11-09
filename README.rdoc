@@ -26,6 +26,10 @@ Stings need to do in production environment.
 
 . config/database connection
 
+. config/settings
+
+. environments/production Gmail Password
+
 === Website
 
 * http://www.joydaxue.com

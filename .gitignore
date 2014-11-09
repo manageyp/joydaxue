@@ -17,6 +17,7 @@ public/photos/
 # Ignore production config
 /config/database.yml
 /config/secrets.yml
+/config/settings.yml
 
 ## Specific to RubyMotion:
 .dat*
