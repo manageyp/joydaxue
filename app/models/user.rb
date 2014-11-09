@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   has_one :user_role
 
+  attr_accessor :captcha_number
+
   scope :active, -> { where(status: 0) }
 
   ModelName = "用户"
@@ -31,7 +33,12 @@ class User < ActiveRecord::Base
 
     def build_user(params)
       record = User.new(params)
-      record if record.save
+      User.transaction do
+        record.save
+        captcha = Captcha.build_captcha(record.cellphone)
+        record.captcha_number = captcha.code if captcha
+      end
+      record
     end
 
   end

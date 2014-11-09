@@ -30,7 +30,7 @@ module Admin
     def create
       @record = User.build_user(protect_params)
       if @record
-        flash[:notice] = '添加成功'
+        flash[:notice] = "添加成功，登录验证码：#{@record.captcha_number}"
         render action: 'show'
       else
         render action: 'new'

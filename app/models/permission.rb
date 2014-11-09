@@ -15,6 +15,11 @@ class Permission < ActiveRecord::Base
   end
 
   class << self
+    def is_permitted(user, controller_name, action_name)
+      user_role = user.user_role
+      user_role && is_checked(user_role.role_id, controller_name, action_name)
+    end
+
     def is_checked(role_id, controller_name, action_name)
       record = where(role_id: role_id, controller_name: controller_name).first
       record && record.action_names.index(action_name)
