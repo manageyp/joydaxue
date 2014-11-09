@@ -31,6 +31,9 @@ gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 gem "kaminari", '0.16.1'
 gem 'kaminari-bootstrap', '3.0.1'
 
+# Ruby client library for Redis.
+gem 'redis', '3.1.0'
+gem 'redis-namespace', '1.5.0'
 
 group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
