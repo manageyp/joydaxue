@@ -1392,3 +1392,11 @@ section * {
   width: 20%;
   padding: 10px;
 }
+.simple-header-info {
+  color: #ffffff;
+  text-align: center;
+  font-weight: 600;
+  font-size: 30px;
+  padding-top: 20px;
+  padding-left: 0px;
+}
