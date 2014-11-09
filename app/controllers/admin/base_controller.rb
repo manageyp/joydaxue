@@ -11,11 +11,10 @@ module Admin
     end
 
     def authentication
-      if session[:username].present?
-        @username = session[:username]
+      if session[:user_name].present?
+        @user_name = session[:user_name]
       else
-        @username = "test"
-        #redirect_to root_path and return
+        redirect_to root_path
       end
     end
   end
