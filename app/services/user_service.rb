@@ -2,8 +2,8 @@ class UserService
 
   class << self
 
-    def authenticate(name, code)
-      user = User.where(name: name).first
+    def authenticate(mobile, code)
+      user = User.where(cellphone: mobile).first
       if user
         captcha, content = CaptchaService.verify_captcha(user.cellphone, code)
         if captcha
@@ -12,7 +12,7 @@ class UserService
           [captcha, content]
         end
       else
-        Util::ErrorCode.error_words(:duplicated_username)
+        Util::ErrorCode.error_words(:username_not_existed)
       end
     end
 

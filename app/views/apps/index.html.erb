@@ -7,16 +7,21 @@
 
     <div class="login-form">
       <div class="form-group">
-        <input type="text" class="form-control login-field" value="" placeholder="请输入用户名" id="login-name">
-        <label class="login-field-icon fui-user" for="login-name"></label>
+        <input type="text" class="form-control login-field" value="" placeholder="请输入手机号" id="login-cellphone">
+        <label class="login-field-icon fui-user" for="login-cellphone"></label>
       </div>
 
       <div class="form-group">
-        <input type="password" class="form-control login-field" value="" placeholder="请输入验证码" id="login-captcha">
-        <label class="login-field-icon fui-lock" for="login-captcha"></label>
+        <div>
+          <input type="text" class="form-control login-field" value="" placeholder="请输入验证码" id="login-captcha">
+          <label class="login-field-icon fui-lock" for="login-captcha"></label>
+        </div>
+        <div>
+          <a class="btn btn-info btn-lg btn-block" id="sendCaptchaBtn" onclick="sendCaptcha();" href="javascript:void(0)">获取验证码</a>
+        </div>
       </div>
 
-      <a class="btn btn-primary btn-lg btn-block" onclick="doLogin();" href="javascript:void(0)">登录</a>
+      <a class="btn btn-primary btn-lg btn-block" id="doLoginBtn" onclick="doLogin();" href="javascript:void(0)">登录</a>
       <a class="login-link" href="#">忘记密码?</a>
     </div>
   </div>

@@ -14,12 +14,13 @@ module Util
     invalid_user_name:             ['1005', '用户名请使用汉字、数字、字母和下划线'],
     invalid_name_length:           ['1006', '用户名请使用2至16个字符'],
     username_is_blank:             ['1007', '用户名不能为空'],
-    duplicated_username:           ['1008', '用户名不能为空'],
+    duplicated_username:           ['1008', '用户名不能重复'],
+    username_not_existed:          ['1009', '用户名不存在'],
 
-    user_invalid_captcha:          ['1009', '验证码错误'],
-    user_expired_captcha:          ['1010', '验证码过期'],
-    user_too_frequent_captcha:     ['1011', '获取手机验证码太频繁'],
-    user_limit_captcha_count:      ['1012', '短信发送次数超限']
+    user_invalid_captcha:          ['2001', '验证码错误'],
+    user_expired_captcha:          ['2002', '验证码过期'],
+    user_too_frequent_captcha:     ['2003', '获取手机验证码太频繁'],
+    user_limit_captcha_count:      ['2004', '短信发送次数超限']
   }
 
   class << self

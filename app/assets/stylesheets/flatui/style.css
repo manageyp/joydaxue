@@ -1400,3 +1400,18 @@ section * {
   padding-top: 20px;
   padding-left: 0px;
 }
+
+.login-form .form-group > div:first-child {
+  padding-left: 0;
+  padding-right: 5px;
+  display: table-cell;
+  width: 55%;
+  position: relative;
+}
+
+.login-form .form-group > div:nth-child(2) {
+  display: table-cell;
+  width: 45%;
+  padding-left: 5px;
+  position: relative;
+}

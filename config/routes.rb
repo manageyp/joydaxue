@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post 'signin'
       get 'signout'
       post 'reset'
+      post 'send_captcha'
     end
   end
 
