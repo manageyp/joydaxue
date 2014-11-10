@@ -18,6 +18,7 @@ public/photos/
 /config/database.yml
 /config/secrets.yml
 /config/settings.yml
+/config/newrelic.yml
 
 ## Specific to RubyMotion:
 .dat*
