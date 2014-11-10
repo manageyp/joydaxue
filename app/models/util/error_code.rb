@@ -20,7 +20,8 @@ module Util
     user_invalid_captcha:          ['2001', '验证码错误'],
     user_expired_captcha:          ['2002', '验证码过期'],
     user_too_frequent_captcha:     ['2003', '获取手机验证码太频繁'],
-    user_limit_captcha_count:      ['2004', '短信发送次数超限']
+    user_limit_captcha_count:      ['2004', '短信发送次数超限'],
+    cellphone_not_existed:         ['2005', '手机号码不存在']
   }
 
   class << self

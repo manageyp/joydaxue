@@ -26,7 +26,7 @@ class CaptchaService
           Util::ErrorCode.error_words(:user_limit_captcha_count)
         end
       else
-        Util::ErrorCode.error_words(:username_not_existed)
+        Util::ErrorCode.error_words(:cellphone_not_existed)
       end
     end
 
