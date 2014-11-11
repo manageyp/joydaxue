@@ -1,5 +1,6 @@
 class School < ActiveRecord::Base
   has_one :school_introduction
+  has_many :school_photos
 
   ModelName = "学校"
   ColumnNames = {
