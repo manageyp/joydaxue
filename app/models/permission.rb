@@ -15,14 +15,27 @@ class Permission < ActiveRecord::Base
   end
 
   class << self
-    def is_permitted(user, controller_name, action_name)
+
+    def permitted?(user, controller_name, action_name)
       user_role = user.user_role
-      user_role && is_checked(user_role.role_id, controller_name, action_name)
+      if user_role
+        permit_controller_action?(user_role.role_id, controller_name, action_name) ||
+        permit_all_actions?(user_role.role_id, controller_name) ||
+        permit_all_controllers?(user_role.role_id)
+      end
     end
 
-    def is_checked(role_id, controller_name, action_name)
+    def permit_controller_action?(role_id, controller_name, action_name)
       record = where(role_id: role_id, controller_name: controller_name).first
       record && record.action_names.index(action_name)
+    end
+
+    def permit_all_actions?(role_id, controller_name)
+      exists?(role_id: role_id, controller_name: controller_name, action_names: 'all')
+    end
+
+    def permit_all_controllers?(role_id, controller_name, action_name)
+      exists?(role_id: role_id, controller_name: 'controllers', action_names: 'all')
     end
 
     def parse_action_names(action_names)
