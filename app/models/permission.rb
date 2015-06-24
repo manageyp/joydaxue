@@ -1,23 +1,16 @@
 # == Schema Information
 #
-# Table name: permissions
+# Table name: permissions 授权
 #
 #  id              :integer          not null, primary key
-#  role_id         :integer          not null
-#  controller_name :string(255)
-#  action_names    :string(255)
+#  role_id         :integer          not null  角色 ID
+#  controller_name :string(255)                Controller 名称
+#  action_names    :string(255)                Controller 内允许访问的 action 名称
 #  created_at      :datetime
 #  updated_at      :datetime
 #
 
 class Permission < ActiveRecord::Base
-
-  ModelName = "授权"
-  ColumnNames = {
-    role_id: "角色 ID",
-    controller_name: "Controller 名称",
-    action_names: "Controller 内允许访问的 action 名称"
-  }
 
   def refresh_permission(params)
     self.role_id = params[:role_id] if params[:role_id].present?

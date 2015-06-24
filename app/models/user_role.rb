@@ -1,10 +1,10 @@
 # == Schema Information
 #
-# Table name: user_roles
+# Table name: user_roles 用户角色
 #
 #  id         :integer          not null, primary key
-#  user_id    :integer          not null
-#  role_id    :integer          not null
+#  user_id    :integer          not null  用户 ID
+#  role_id    :integer          not null  角色 ID
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -12,12 +12,6 @@
 class UserRole < ActiveRecord::Base
   belongs_to :user
   belongs_to :role
-
-  ModelName = "用户角色"
-  ColumnNames = {
-    user_id: "用户 ID",
-    role_id: "角色 ID"
-  }
 
   def refresh_user_role(params)
     self.user_id = params[:user_id] if params[:user_id].present?

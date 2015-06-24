@@ -1,11 +1,11 @@
 # == Schema Information
 #
-# Table name: roles
+# Table name: roles 角色
 #
 #  id          :integer          not null, primary key
-#  name        :string(255)
-#  description :string(255)
-#  status      :integer          default(0)
+#  name        :string(255)                 名称
+#  description :string(255)                 描述
+#  status      :integer          default(0) 状态
 #  created_at  :datetime
 #  updated_at  :datetime
 #
@@ -16,13 +16,6 @@ class Role < ActiveRecord::Base
   has_many :user_roles
 
   scope :active, -> { where(status: 0) }
-
-  ModelName = "角色"
-  ColumnNames = {
-    name: "名称",
-    description: "描述",
-    status: "状态"
-  }
 
   def refresh_role(params)
     self.name = params[:name] if params[:name].present?

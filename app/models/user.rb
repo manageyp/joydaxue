@@ -1,15 +1,15 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: users 用户
 #
 #  id           :integer          not null, primary key
-#  name         :string(255)      not null
-#  email        :string(255)      not null
-#  cellphone    :string(255)      not null
-#  display_name :string(255)
-#  sex          :integer
-#  status       :integer          default(0)
-#  memo         :string(255)
+#  name         :string(255)      not null   名称
+#  email        :string(255)      not null   邮箱
+#  cellphone    :string(255)      not null   手机号
+#  display_name :string(255)                 姓名
+#  sex          :integer                     性别
+#  status       :integer          default(0) 状态
+#  memo         :string(255)                 备注
 #  created_at   :datetime
 #  updated_at   :datetime
 #
@@ -22,17 +22,6 @@ class User < ActiveRecord::Base
   attr_accessor :captcha_number
 
   scope :active, -> { where(status: 0) }
-
-  ModelName = "用户"
-  ColumnNames = {
-    name: "名称",
-    email: "邮箱",
-    cellphone: "手机号",
-    display_name: "姓名",
-    sex: "性别",
-    status: "状态",
-    memo: "备注"
-  }
 
   def refresh_user(params)
     self.name = params[:name] if params[:name].present?

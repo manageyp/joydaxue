@@ -1,25 +1,17 @@
 # == Schema Information
 #
-# Table name: captchas
+# Table name: captchas 手机验证码
 #
 #  id           :integer          not null, primary key
-#  captcha_type :string(255)      not null
-#  mobile       :string(255)      not null
-#  send_count   :integer          default(0)
-#  code         :string(255)      not null
+#  captcha_type :string(255)      not null   类型
+#  mobile       :string(255)      not null   手机号
+#  send_count   :integer          default(0) 发送次数
+#  code         :string(255)      not null   验证码
 #  created_at   :datetime
 #  updated_at   :datetime
 #
 
 class Captcha < ActiveRecord::Base
-
-  ModelName = "手机验证码"
-  ColumnNames = {
-    captcha_type: "类型",
-    mobile: "手机号",
-    send_count: "发送次数",
-    code: "验证码"
-  }
 
   EXPIRED_TIME = 600  # 验证码过期时间 60 minutes
   SEND_INTERVAL = 30  # 发送验证码间隔 30 seconds

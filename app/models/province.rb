@@ -1,18 +1,13 @@
 # == Schema Information
 #
-# Table name: provinces
+# Table name: provinces 学校所属省份
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  name       :string(255)      省份名称
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Province < ActiveRecord::Base
-
-  ModelName = "学校所属省份"
-  ColumnNames = {
-    name: "省份名称"
-  }
 
 end
