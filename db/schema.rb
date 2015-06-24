@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106011258) do
+ActiveRecord::Schema.define(version: 20141111103921) do
 
   create_table "access_tokens", force: true do |t|
     t.integer  "user_id",    null: false
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 20141106011258) do
   end
 
   add_index "school_introductions", ["school_id"], name: "index_school_introductions_on_school_id", using: :btree
+
+  create_table "school_photos", force: true do |t|
+    t.integer  "school_id",              null: false
+    t.string   "image"
+    t.integer  "position",   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "school_photos", ["school_id"], name: "index_school_photos_on_school_id", using: :btree
 
   create_table "schools", force: true do |t|
     t.integer  "province_id",                                               null: false

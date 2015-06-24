@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: captchas
+#
+#  id           :integer          not null, primary key
+#  captcha_type :string(255)      not null
+#  mobile       :string(255)      not null
+#  send_count   :integer          default(0)
+#  code         :string(255)      not null
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class Captcha < ActiveRecord::Base
 
   ModelName = "手机验证码"

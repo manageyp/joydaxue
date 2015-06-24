@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: access_tokens
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer          not null
+#  token      :string(255)      not null
+#  expired_at :datetime
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class AccessToken < ActiveRecord::Base
 
   ModelName = "用户 Token"
