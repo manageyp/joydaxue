@@ -17,4 +17,65 @@
 require 'rails_helper'
 
 RSpec.describe User, :type => :model do
+
+  let(:user) { FactoryGirl.create(:user) }
+
+
+  context "validations" do
+    it "requires unique name" do
+      expect(user).to validate_uniqueness_of(:name)
+    end
+
+    it "requires unique name" do
+      expect(user).to validate_presence_of(:name)
+    end
+
+    it "requires unique email" do
+      expect(user).to validate_uniqueness_of(:email)
+    end
+
+    it "requires unique cellphone" do
+      expect(user).to validate_uniqueness_of(:cellphone)
+    end
+  end
+
+
+  context "associations" do
+    it { should have_one(:user_role) }
+
+    it { should have_many(:user_devices) }
+  end
+
+
+  context "scopes" do
+    describe ".active" do
+
+      it "returns active users" do
+        expect(User.active).to match_array [user]
+      end
+
+    end
+  end
+
+
+  describe "#refresh_user" do
+    it "should refresh user name" do
+      params = { name: 'queenie' }
+      user.refresh_user(params)
+      expect(user.name).to eq(params[:name])
+    end
+  end
+
+
+  describe ".build_user" do
+    it "should build user succeed" do
+      expect {
+        params = { name: 'queenie', email: 'xiaoyu@qq.com', cellphone: '18888888888' }
+        new_user = User.build_user(params)
+
+        expect(new_user.captcha_number).not_to be_empty
+      }.to change { User.count }.by(1)
+    end
+  end
+
 end

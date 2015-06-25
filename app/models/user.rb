@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
 
   attr_accessor :captcha_number
 
+  validates :name, uniqueness: true, presence: true
+  validates :email, uniqueness: true, presence: true
+  validates :cellphone, uniqueness: true, presence: true
+
   scope :active, -> { where(status: 0) }
 
   def refresh_user(params)

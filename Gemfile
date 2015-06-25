@@ -62,6 +62,8 @@ group :development, :test do
   gem 'capistrano-rails'
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+group :test do
+  gem 'shoulda-matchers', '2.8.0'
+  gem 'database_cleaner', '1.4.1'
+end
 

@@ -14,17 +14,15 @@
 #  updated_at   :datetime
 #
 
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :user do
     id 1
-    name "MyString"
-    email "MyString"
-    cellphone "MyString"
-    display_name "MyString"
+    name "henry"
+    email "manageyp@gmail.com"
+    cellphone "18888888888"
+    display_name "henry lee"
     sex 1
     status 0
-    memo "MyString"
+    memo "enjoy coding"
   end
 end
