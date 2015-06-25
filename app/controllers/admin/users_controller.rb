@@ -47,6 +47,7 @@ module Admin
     # end
 
     private
+
       def fetch_record
         @record = User.find_by_id(params[:id])
         unless @record
