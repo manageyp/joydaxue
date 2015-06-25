@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   include Util::CommonFields
 
   has_one :user_role
+  has_many :user_devices
 
   attr_accessor :captcha_number
 
