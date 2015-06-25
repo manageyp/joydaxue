@@ -14,6 +14,7 @@ class Role < ActiveRecord::Base
   include Util::CommonFields
 
   has_many :user_roles
+  has_many :permissions
 
   scope :active, -> { where(status: 0) }
 

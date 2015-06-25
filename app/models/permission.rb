@@ -11,6 +11,7 @@
 #
 
 class Permission < ActiveRecord::Base
+  belongs_to :role
 
   def refresh_permission(params)
     self.role_id = params[:role_id] if params[:role_id].present?
