@@ -21,6 +21,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+# Grape RESTful API microframework
+gem 'grape', ' 0.9.0'
+
 # Use unicorn as the app server
 gem 'unicorn', "4.8.3"
 
