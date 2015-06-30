@@ -11,12 +11,16 @@
 #
 
 class Role < ActiveRecord::Base
-  include Util::CommonFields
-
   has_many :user_roles
   has_many :permissions
 
-  scope :active, -> { where(status: 0) }
+  scope :active, -> { where(status: :active) }
+
+  STATUS_CODES = { 0 => '正常', 1 => '锁定' }
+
+  def status_word
+    STATUS_CODES[self.status]
+  end
 
   def refresh_role(params)
     self.name = params[:name] if params[:name].present?

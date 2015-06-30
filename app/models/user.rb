@@ -15,8 +15,6 @@
 #
 
 class User < ActiveRecord::Base
-  include Util::CommonFields
-
   has_one :user_role
   has_many :user_devices
 
@@ -27,6 +25,21 @@ class User < ActiveRecord::Base
   validates :cellphone, uniqueness: true, presence: true
 
   scope :active, -> { where(status: 0) }
+
+  SEX_TYPES = { 0 => "女", 1 => "男" }
+  STATUS_CODES = { 0 => '正常', 1 => '锁定' }
+
+  def status_word
+    STATUS_CODES[self.status]
+  end
+
+  def sex_word
+    SEX_TYPES[self.sex]
+  end
+
+  def is_active?
+    self.status == 0
+  end
 
   def refresh_user(params)
     self.name = params[:name] if params[:name].present?
