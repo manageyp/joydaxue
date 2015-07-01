@@ -34,4 +34,24 @@ class School < ActiveRecord::Base
   has_one :school_introduction
   has_many :school_photos
 
+  def favorite_id
+    "school:#{self.id}"
+  end
+
+  class << self
+
+    def fetch_school(id)
+      where(id: id).includes(:school_photos, :school_introduction).first
+    end
+
+    def paginate_schools(min_updated_at, page = 1, per_page = 10)
+      if min_updated_at.present?
+        where("updated_at < ?", min_updated_at).page(page).per(per_page).order("updated_at desc")
+      else
+        all.page(page).per(per_page).order("updated_at desc")
+      end
+    end
+
+  end
+
 end

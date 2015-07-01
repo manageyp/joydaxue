@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'apps#index'
   get 'admin', to: 'admin/schools#index'
 
+  mount API => '/'  # Grape APIs
+
   resources :apps, only: [:index]
   resources :users do
     collection do
