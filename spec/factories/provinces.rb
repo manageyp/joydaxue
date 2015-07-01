@@ -13,6 +13,6 @@
 FactoryGirl.define do
   factory :province do
     id 1
-    name "MyString"
+    name "江苏省"
   end
 end

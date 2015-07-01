@@ -37,9 +37,9 @@ FactoryGirl.define do
     id 1
     province_id 1
     city_id 1
-    name "MyString"
-    website "MyString"
-    found_year "MyString"
-    address "MyString"
+    name "南通大学"
+    website "http://www.ntu.edu.cn"
+    found_year "2004"
+    address "江苏省南通市啬园路9号"
   end
 end

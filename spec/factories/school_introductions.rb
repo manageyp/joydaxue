@@ -16,7 +16,7 @@ FactoryGirl.define do
   factory :school_introduction do
     id 1
     school_id 1
-    short_content "MyString"
-    full_content "MyText"
+    short_content "南通大学"
+    full_content "南通大学"
   end
 end

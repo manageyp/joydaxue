@@ -15,6 +15,6 @@ FactoryGirl.define do
   factory :city do
     id 1
     province_id 1
-    name "MyString"
+    name "南通市"
   end
 end

@@ -71,7 +71,7 @@ module AdminHelper
   end
 
   def status_info(record)
-    if record.status == 0
+    if record.is_active?
       "<span class='label bg-success'>#{record.status_word}</span>".html_safe
     else
       "<span class='label bg-danger'>#{record.status_word}</span>".html_safe
