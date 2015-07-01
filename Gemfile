@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.0'
 
 # Grape RESTful API microframework
 gem 'grape', ' 0.9.0'
+# gem 'active_model_serializers', ' 0.9.3'
+# gem 'grape-active_model_serializers', '1.3.2'
 
 # Use unicorn as the app server
 gem 'unicorn', "4.8.3"
@@ -53,7 +55,7 @@ group :development, :test do
   gem "annotate", "~> 2.6.0.beta2"
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '1.1.3'
 
   gem "rspec-rails", '3.0.1'
   gem "factory_girl", '4.4.0'
