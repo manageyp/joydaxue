@@ -1,4 +1,4 @@
-class UserService
+class LoginService
 
   class << self
 

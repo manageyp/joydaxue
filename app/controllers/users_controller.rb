@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   layout false
 
   def signin
-    user, content = UserService.authenticate(params[:cellphone], params[:captcha])
+    user, content = LoginService.authenticate(params[:cellphone], params[:captcha])
     if user
       session[:user_id] = user.id
       session[:user_name] = user.name
