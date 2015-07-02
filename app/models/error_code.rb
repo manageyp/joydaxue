@@ -31,6 +31,9 @@ class ErrorCode
     user_password_error:           ['1018', '用户名或密码有误，请重新输入'],
     user_not_existed:              ['1019', '用户不存在'],
 
+    captcha_limit_count:           ['1020', '短信发送次数超限'],
+    cellphone_not_existed:         ['1021', '手机号码不存在'],
+
     school_not_existed:            ['2001', '学校不存在']
   }
 

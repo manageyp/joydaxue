@@ -6,13 +6,13 @@ class CaptchaService
       captcha = Captcha.fetch_captcha(mobile, code)
       if captcha
         if captcha.expired?
-          Util::ErrorCode.error_words(:user_expired_captcha)
+          ErrorCode.error_words(:captcha_is_expired)
         else
           captcha.destroy
           [captcha]
         end
       else
-        Util::ErrorCode.error_words(:user_invalid_captcha)
+        ErrorCode.error_words(:captcha_is_invalid)
       end
     end
 
@@ -23,10 +23,10 @@ class CaptchaService
         if captcha
           [captcha]
         else
-          Util::ErrorCode.error_words(:user_limit_captcha_count)
+          ErrorCode.error_words(:captcha_limit_count)
         end
       else
-        Util::ErrorCode.error_words(:cellphone_not_existed)
+        ErrorCode.error_words(:cellphone_not_existed)
       end
     end
 

@@ -12,7 +12,7 @@ class UserService
           [captcha, content]
         end
       else
-        Util::ErrorCode.error_words(:username_not_existed)
+        ErrorCode.error_words(:user_not_existed)
       end
     end
 
