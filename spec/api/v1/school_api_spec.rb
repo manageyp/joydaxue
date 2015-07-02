@@ -9,7 +9,7 @@ module V1
       @school = create(:school)
     end
 
-    describe "GET api /tibet/v1/schools" do
+    describe "GET api /v1/schools" do
       it "should get schools" do
         get "/v1/schools"
         response.status.should == 200
@@ -20,7 +20,7 @@ module V1
       end
     end
 
-    describe "GET api /tibet/v1/schools/id" do
+    describe "GET api /v1/schools/id" do
       it "should not get school detail with wrong id" do
         get "/v1/schools/500"
         response.status.should == 200
