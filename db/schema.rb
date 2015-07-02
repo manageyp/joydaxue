@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111103921) do
+ActiveRecord::Schema.define(version: 20150702070632) do
 
   create_table "access_tokens", force: true do |t|
     t.integer  "user_id",    null: false
@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(version: 20141111103921) do
 
   create_table "captchas", force: true do |t|
     t.string   "captcha_type",             null: false
-    t.string   "mobile",                   null: false
+    t.string   "cellphone",                null: false
     t.integer  "send_count",   default: 0
     t.string   "code",                     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "captchas", ["captcha_type", "mobile"], name: "index_captchas_on_captcha_type_and_mobile", unique: true, using: :btree
+  add_index "captchas", ["captcha_type", "cellphone"], name: "index_captchas_on_captcha_type_and_cellphone", unique: true, using: :btree
 
   create_table "cities", force: true do |t|
     t.integer  "province_id", null: false

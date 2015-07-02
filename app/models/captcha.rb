@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  captcha_type :string(255)      not null   类型
-#  mobile       :string(255)      not null   手机号
+#  cellphone       :string(255)      not null   手机号
 #  send_count   :integer          default(0) 发送次数
 #  code         :string(255)      not null   验证码
 #  created_at   :datetime
@@ -30,33 +30,33 @@ class Captcha < ActiveRecord::Base
 
   class << self
 
-    def fetch_captcha(mobile, code)
+    def fetch_captcha(cellphone, code)
       # TODO default to be login type
-      where(mobile: mobile, code: code).first
+      where(cellphone: cellphone, code: code).first
     end
 
-    def valid_today_count?(mobile)
-      today_count = Util::DailyCounter.get_counter(mobile)
+    def valid_today_count?(cellphone)
+      today_count = Util::DailyCounter.get_counter(cellphone)
       today_count <= MAX_DAY_SENDED_COUNTER
     end
 
-    def increase_today_counter(mobile)
-      Util::DailyCounter.increase_counter(mobile)
+    def increase_today_counter(cellphone)
+      Util::DailyCounter.increase_counter(cellphone)
     end
 
-    def build_captcha(mobile)
-      return unless valid_today_count?(mobile)
+    def build_captcha(cellphone)
+      return unless valid_today_count?(cellphone)
 
       code = numeric_code
-      captcha = Captcha.find_by_mobile(mobile)
+      captcha = Captcha.find_by_cellphone(cellphone)
       if captcha
         captcha.update_attributes(code: code)
       else
-        captcha = Captcha.create(mobile: mobile, code: code,
+        captcha = Captcha.create(cellphone: cellphone, code: code,
           captcha_type: CAPTCHA_TYPES[:login])
       end
 
-      increase_today_counter(mobile)
+      increase_today_counter(cellphone)
       captcha
     end
 
