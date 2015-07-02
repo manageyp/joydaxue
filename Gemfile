@@ -46,6 +46,13 @@ gem "settingslogic", "2.0.9"
 # Exception notification
 gem 'exception_notification', '4.0.1'
 
+# Ruby client library for Redis.
+gem 'redis', '3.1.0'
+
+# Sidekiq background processing
+gem 'sidekiq', '3.2.1'
+gem 'sinatra', '1.4.5', require: false
+
 # New Relic Ruby Agent
 gem 'newrelic_rpm', '3.9.6.257'
 # gem 'newrelic-grape', '2.0.0'
