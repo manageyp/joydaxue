@@ -20,6 +20,19 @@ module V1
         end
       end
 
+      desc ' 发送用户注册验证码接口'
+      params do
+        optional :cellphone, type: String, desc: "用户的手机号"
+      end
+
+      post '/send_captcha' do
+        result, content = V1::UserService.send_captcha(params[:cellphone])
+        if result
+          render_json(data: content)
+        else
+          render_error(content)
+        end
+      end
 
     end
   end

@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  captcha_type :string(255)      not null
-#  mobile       :string(255)      not null
+#  cellphone       :string(255)      not null
 #  send_count   :integer          default(0)
 #  code         :string(255)      not null
 #  created_at   :datetime
@@ -17,7 +17,7 @@ FactoryGirl.define do
   factory :captcha do
     id 1
     captcha_type "signin"
-    mobile "15026612137"
+    cellphone "15026612137"
     send_count 1
     code "1234"
   end

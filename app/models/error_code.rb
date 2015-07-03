@@ -32,7 +32,10 @@ class ErrorCode
     user_not_existed:              ['1019', '用户不存在'],
 
     captcha_limit_count:           ['1020', '短信发送次数超限'],
-    cellphone_not_existed:         ['1021', '手机号码不存在'],
+    cellphone_is_blank:            ['1021', '手机号码不能为空'],
+    cellphone_is_existed:          ['1022', '手机号码已存在，请更换其他手机号码'],
+    cellphone_format_invalid:      ['1023', '手机号码格式有误，请输入正确的手机号码'],
+    cellphone_not_existed:         ['1024', '手机号码不存在'],
 
     school_not_existed:            ['2001', '学校不存在']
   }
