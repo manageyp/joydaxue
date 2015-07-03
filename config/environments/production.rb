@@ -3,6 +3,8 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
+  # Use a different cache store in production.
+  config.cache_store = [:dalli_store,"127.0.0.1", { namespace: "joydaxue", compress: true, expires_in: 60*60*24 }]
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
