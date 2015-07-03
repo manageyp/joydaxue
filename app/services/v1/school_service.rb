@@ -12,7 +12,7 @@ module V1
       end
 
       def get_school_detail(params)
-        school = School.fetch_school(params[:id])
+        school = School.fetch_by_id(params[:id])
         if school
           [school, V1::SchoolWrapper.school_detail(school)]
         else

@@ -54,6 +54,19 @@ class User < ActiveRecord::Base
 
   class << self
 
+    def fetch_by_id(id)
+      record = select(:id, :updated_at).where(id: id).first
+      if record
+        cache_key = "user_#{record.id}_#{record.updated_at.to_i}"
+        cache_data = CacheService.get(cache_key)
+        unless cache_data
+          cache_data = find_by_id(id)
+          CacheService.set_week_expires(cache_key, cache_data)
+        end
+        cache_data
+      end
+    end
+
     def build_user(params)
       record = User.new(params)
       User.transaction do
