@@ -71,6 +71,7 @@ GEM
     coffee-script-source (1.8.0)
     colorize (0.7.3)
     connection_pool (2.2.0)
+    dalli (2.7.1)
     database_cleaner (1.4.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -126,7 +127,6 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
-    newrelic_rpm (3.9.6.257)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
     rack (1.5.5)
@@ -240,6 +240,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (~> 2.6.0.beta2)
   capistrano-rails
+  dalli (= 2.7.1)
   database_cleaner (= 1.4.1)
   exception_notification (= 4.0.1)
   factory_girl (= 4.4.0)
@@ -251,7 +252,6 @@ DEPENDENCIES
   kaminari-bootstrap (= 3.0.1)
   minitest (= 5.3.5)
   mysql2 (= 0.3.16)
-  newrelic_rpm (= 3.9.6.257)
   rails (= 4.1.8)
   ransack!
   redis (= 3.1.0)

@@ -53,8 +53,11 @@ gem 'redis', '3.1.0'
 gem 'sidekiq', '3.2.1'
 gem 'sinatra', '1.4.5', require: false
 
+# memcached
+gem 'dalli', '2.7.1'
+
 # New Relic Ruby Agent
-gem 'newrelic_rpm', '3.9.6.257'
+# gem 'newrelic_rpm', '3.9.6.257'
 # gem 'newrelic-grape', '2.0.0'
 
 group :development, :test do
