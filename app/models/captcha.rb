@@ -20,6 +20,10 @@ class Captcha < ActiveRecord::Base
     login: 'login' # 登录验证码
   }
 
+  def valid_code?(value)
+    value.present? && value == self.code
+  end
+
   def expired?
     Time.now.to_i > (self.updated_at + EXPIRED_TIME).to_i
   end
@@ -29,6 +33,10 @@ class Captcha < ActiveRecord::Base
   end
 
   class << self
+
+    def fetch_code(cellphone, captcha_type = 'login')
+      where(captcha_type: captcha_type, cellphone: cellphone).first
+    end
 
     def fetch_captcha(cellphone, code)
       # TODO default to be login type

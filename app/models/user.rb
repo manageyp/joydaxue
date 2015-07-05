@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
     self.status == 0
   end
 
+  def valid_password?(pwd_value)
+    # TODO valid password
+  end
+
   def refresh_user(params)
     self.name = params[:name] if params[:name].present?
     self.email = params[:email] if params[:email].present?
@@ -65,6 +69,14 @@ class User < ActiveRecord::Base
         end
         cache_data
       end
+    end
+
+    def fetch_by_cellphone(cellphone)
+      where(cellphone: cellphone).first
+    end
+
+    def register(cellphone, password)
+      # TODO do user register and set password
     end
 
     def build_user(params)

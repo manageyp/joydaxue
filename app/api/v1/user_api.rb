@@ -34,6 +34,37 @@ module V1
         end
       end
 
+      desc '用户注册接口'
+      params do
+        optional :cellphone, type: String, desc: "用户的手机号"
+        optional :code, type: String, desc: "手机验证码"
+        optional :password, type: String, desc: "用户密码, 6至16位字符"
+      end
+
+      post '/signup' do
+        result, content = V1::UserService.signup(params)
+        if result
+          render_json(data: content)
+        else
+          render_error(content)
+        end
+      end
+
+      desc '用户登录接口'
+      params do
+        optional :cellphone, type: String, desc: "用户的手机号"
+        optional :password, type: String, desc: "用户密码, 6至16位字符"
+      end
+
+      post '/signin' do
+        result, content = V1::UserService.signin(params)
+        if result
+          render_json(data: content)
+        else
+          render_error(content)
+        end
+      end
+
     end
   end
 end
