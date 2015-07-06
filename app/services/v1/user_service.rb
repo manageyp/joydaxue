@@ -4,10 +4,9 @@ module V1
     class << self
 
       def get_user_detail(params)
-        current_user_id = params[:user_id]
         user = User.fetch_by_id(params[:id])
         if user.present?
-          [user, V1::UserWrapper.user_detail(user, current_user_id)]
+          [user, V1::UserWrapper.user_detail(user)]
         else
           ErrorCode.error_content(:user_not_existed)
         end
@@ -44,9 +43,9 @@ module V1
             if !Util::ValidateUtil.valid_pwd?(params[:password])
               ErrorCode.error_content(:password_is_invalid)
             elsif !Util::ValidateUtil.valid_pwd_length?(params[:password])
-              ErrorCode.error_content(:invalid_password_length)
+              ErrorCode.error_content(:password_length_invalid)
             else
-              user = User.register(captcha, params[:password])
+              user = User.register_by_cellphone(captcha, params[:password])
               [user, V1::UserWrapper.user_detail(user)]
             end
           end

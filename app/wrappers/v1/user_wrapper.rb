@@ -3,8 +3,7 @@ module V1
 
     class << self
 
-      def user_detail(user, current_user_id)
-        # TODO friendship with current_user
+      def user_detail(user)
         {
           user_id: user.id,
           name: user.name,
