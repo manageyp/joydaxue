@@ -6,7 +6,6 @@
 #  name         :string(255)      not null
 #  email        :string(255)      not null
 #  cellphone    :string(255)      not null
-#  display_name :string(255)
 #  sex          :integer
 #  status       :integer          default(0)
 #  memo         :string(255)
@@ -20,9 +19,10 @@ FactoryGirl.define do
     name "henry"
     email "manageyp@gmail.com"
     cellphone "18888888888"
-    display_name "henry lee"
     sex 1
     status 0
     memo "enjoy coding"
+    password '116763115b3fbf99b12cc38b388fc825' # 123456
+    password_salt 'MfneSBCopBcjR4rxHuxxRQhh'
   end
 end

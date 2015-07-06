@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702070632) do
+ActiveRecord::Schema.define(version: 20150706013137) do
 
   create_table "access_tokens", force: true do |t|
     t.integer  "user_id",    null: false
@@ -152,13 +152,14 @@ ActiveRecord::Schema.define(version: 20150702070632) do
   add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "name",                     null: false
-    t.string   "email",                    null: false
-    t.string   "cellphone",                null: false
-    t.string   "display_name"
+    t.string   "name",                      null: false
+    t.string   "email"
+    t.string   "cellphone"
     t.integer  "sex"
-    t.integer  "status",       default: 0
+    t.integer  "status",        default: 0
     t.string   "memo"
+    t.string   "password"
+    t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

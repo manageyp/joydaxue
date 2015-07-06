@@ -6,7 +6,6 @@
 #  name         :string(255)      not null
 #  email        :string(255)      not null
 #  cellphone    :string(255)      not null
-#  display_name :string(255)
 #  sex          :integer
 #  status       :integer          default(0)
 #  memo         :string(255)
@@ -28,10 +27,6 @@ RSpec.describe User, :type => :model do
 
     it "requires unique name" do
       expect(user).to validate_presence_of(:name)
-    end
-
-    it "requires unique email" do
-      expect(user).to validate_uniqueness_of(:email)
     end
 
     it "requires unique cellphone" do

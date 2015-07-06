@@ -16,7 +16,7 @@
 FactoryGirl.define do
   factory :captcha do
     id 1
-    captcha_type "signin"
+    captcha_type "login"
     cellphone "15026612137"
     send_count 1
     code "1234"
