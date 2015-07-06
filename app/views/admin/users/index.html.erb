@@ -25,7 +25,6 @@
               <th>邮箱</th>
               <th>手机号</th>
               <th>性别</th>
-              <th>姓名</th>
               <th>状态</th>
               <th>创建时间</th>
               <th>操作</th>
@@ -40,7 +39,6 @@
                   <td><%= record.email %></td>
                   <td><%= record.cellphone %></td>
                   <td><%= record.sex_word %></td>
-                  <td><%= record.display_name %></td>
                   <td><%= status_info(record) %></td>
                   <td><%= chinese_datetime(record.created_at) %></td>
                   <td>

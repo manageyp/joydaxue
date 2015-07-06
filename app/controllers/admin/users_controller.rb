@@ -57,7 +57,7 @@ module Admin
       end
 
       def protect_params
-        params.require(:user).permit(:name, :email, :cellphone, :display_name,
+        params.require(:user).permit(:name, :email, :cellphone,
           :sex, :status)
       end
 
