@@ -104,14 +104,14 @@ module V1
       return unless require_token?
 
       if params[:token].blank?
-        content = ErrorCode.error_value(:invalid_user_token)
+        content = ErrorCode.error_value(:user_token_invalid)
         error!(render_error(content), correct_http_status)
       else
         user_token = UserToken.verify_token(params[:token])
         if user_token
           params[:user_id] = user_token.user_id
         else
-          content = ErrorCode.error_value(:expired_user_token)
+          content = ErrorCode.error_value(:user_token_expired)
           error!(render_error(content), correct_http_status)
         end
       end

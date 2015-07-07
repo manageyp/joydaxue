@@ -37,6 +37,9 @@ class ErrorCode
     cellphone_format_invalid:      ['1023', '手机号码格式有误，请输入正确的手机号码'],
     cellphone_not_existed:         ['1024', '手机号码不存在'],
 
+    username_existed:              ['1025', '用户名已存在'],
+    user_update_error:             ['1026', '用户信息保存失败，请稍后重试'],
+
     school_not_existed:            ['2001', '学校不存在']
   }
 

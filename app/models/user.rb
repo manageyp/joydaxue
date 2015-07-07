@@ -55,6 +55,12 @@ class User < ActiveRecord::Base
 
   def refresh_user(params)
     self.name = params[:name] if params[:name].present?
+    self.sex = params[:sex] if params[:sex].present?
+    self.save
+  end
+
+  def admin_refresh_user(params)
+    self.name = params[:name] if params[:name].present?
     self.email = params[:email] if params[:email].present?
     self.cellphone = params[:cellphone] if params[:cellphone].present?
     self.sex = params[:sex] if params[:sex].present?
@@ -76,6 +82,10 @@ class User < ActiveRecord::Base
         end
         cache_data
       end
+    end
+
+    def fetch_by_name(name)
+      where(name: name).first
     end
 
     def fetch_by_cellphone(cellphone)

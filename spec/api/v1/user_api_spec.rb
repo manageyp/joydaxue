@@ -7,8 +7,11 @@ module V1
 
     before(:each) do
       @user = create(:user)
+      @user_alice = create(:user_alice)
+      @user_token = create(:user_token)
       @captcha = create(:captcha)
     end
+
 
     describe "GET api /v1/users/id" do
       it "should not get user detail with wrong id" do
@@ -28,6 +31,7 @@ module V1
         resp_data["data"]["token"].should_not be_nil
       end
     end
+
 
     describe "POST api /v1/users/send_captcha" do
       it "should do users send_captcha" do
@@ -52,6 +56,7 @@ module V1
         resp_data["status"].should == "1023"
       end
     end
+
 
     describe "POST api /v1/users/signup" do
       it "should do users signup" do
@@ -90,6 +95,7 @@ module V1
       end
     end
 
+
     describe "POST api /v1/users/signin" do
       it "should do users signin by cellphone" do
         post "/v1/users/signin", cellphone: @user.cellphone, password: '123456'
@@ -121,6 +127,58 @@ module V1
         response.status.should == 201
         resp_data = JSON.parse(response.body)
         resp_data["status"].should == "1018"
+      end
+    end
+
+
+    describe "POST api /v1/users/update_profile" do
+      it "should do users update_profile" do
+        post "/v1/users/update_profile", token: @user_token.token,
+          name: "new_user_name", sex: 0
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("0000")
+        expect(resp_data["data"]["user_id"]).to eq(@user.id)
+        expect(resp_data["data"]["name"]).to eq("new_user_name")
+        expect(resp_data["data"]["sex"]).not_to eq(@user.sex)
+        expect(resp_data["data"]["sex"]).to eq(0)
+        expect(resp_data["data"]["token"]).not_to eq(nil)
+      end
+
+      it "should not do users update_profile because invalid token" do
+        post "/v1/users/update_profile", name: @user.name
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "1003"
+      end
+
+      it "should not do users update_profile because expired token" do
+        post "/v1/users/update_profile", token: "expired token", name: @user.name
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        puts resp_data.inspect
+        resp_data["status"].should == "1004"
+      end
+
+      it "should not do users update_profile because invalid username" do
+        post "/v1/users/update_profile", token: @user_token.token, name: 'abc@123'
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "1005"
+      end
+
+      it "should not do users update_profile because invalid username length" do
+        post "/v1/users/update_profile", token: @user_token.token, name: 'a'
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "1006"
+      end
+
+      it "should not do users update_profile because duplicated username" do
+        post "/v1/users/update_profile", token: @user_token.token, name: @user_alice.name
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "1025"
       end
     end
 

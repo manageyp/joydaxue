@@ -71,6 +71,31 @@ module V1
         end
       end
 
+      def update_profile(params)
+        current_user = User.fetch_by_id(params[:user_id])
+
+        if params[:name].present?
+          unless Util::ValidateUtil.valid_name?(params[:name])
+            return ErrorCode.error_content(:username_invalid)
+          end
+
+          unless Util::ValidateUtil.valid_name_length?(params[:name])
+            return ErrorCode.error_content(:username_invalid_length)
+          end
+
+          user = User.fetch_by_name(params[:name])
+          if user.present? && user.id != current_user.id
+            return ErrorCode.error_content(:username_existed)
+          end
+        end
+
+        if current_user.refresh_user(params)
+          [current_user, V1::UserWrapper.user_detail(current_user)]
+        else
+          ErrorCode.error_content(:user_update_error)
+        end
+      end
+
     end
 
   end

@@ -65,6 +65,23 @@ module V1
         end
       end
 
+      desc '更新用户资料接口'
+      params do
+        optional :token, type: String, desc: "用户的唯一标识型"
+        optional :name, type: String, desc: "用户的名称，不能重复"
+        optional :sex, type: String, desc: "用户的性别，0为女，1为男"
+      end
+
+      post '/update_profile' do
+        validate_user_token
+        result, content = V1::UserService.update_profile(params)
+        if result
+          render_json(data: content)
+        else
+          render_error(content)
+        end
+      end
+
     end
   end
 end

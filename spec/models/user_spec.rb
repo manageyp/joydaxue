@@ -68,7 +68,7 @@ RSpec.describe User, :type => :model do
         params = { name: 'queenie', email: 'xiaoyu@qq.com', cellphone: '18888888888' }
         new_user = User.build_user(params)
 
-        expect(new_user.captcha_number).not_to be_empty
+        expect(new_user.captcha_number).not_to eq(nil)
       }.to change { User.count }.by(1)
     end
   end
