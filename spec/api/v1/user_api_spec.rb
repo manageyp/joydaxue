@@ -25,6 +25,7 @@ module V1
         resp_data["status"].should == "0000"
         resp_data["data"]["user_id"].should_not be_nil
         resp_data["data"]["name"].should_not be_nil
+        resp_data["data"]["token"].should_not be_nil
       end
     end
 
@@ -58,10 +59,10 @@ module V1
           code: @captcha.code, password: '123456'
         response.status.should == 201
         resp_data = JSON.parse(response.body)
-        puts resp_data.inspect
         resp_data["status"].should == "0000"
         resp_data["data"]["user_id"].should_not be_nil
         resp_data["data"]["name"].should_not be_nil
+        resp_data["data"]["token"].should_not be_nil
       end
 
       it "should not users signup wrong cellphone" do
@@ -95,7 +96,9 @@ module V1
         response.status.should == 201
         resp_data = JSON.parse(response.body)
         resp_data["status"].should == "0000"
+        resp_data["data"]["user_id"].should_not be_nil
         resp_data["data"]["name"].should_not be_nil
+        resp_data["data"]["token"].should_not be_nil
       end
 
       it "should do users signin by name" do

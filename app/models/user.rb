@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
         user.set_password(password)
         user.save
 
-        # TODO UserToken.create_token(user.id)
+        UserToken.create_token(user.id)
         captcha.destroy
       end
       user

@@ -62,7 +62,7 @@ module V1
         user = User.fetch_by_cellphone(params[:cellphone])
         if user.present?
           if user.valid_password?(params[:password])
-            [user, V1::UserWrapper.user_detail(user)]
+            [user, V1::UserWrapper.user_detail(user, true)]
           else
             ErrorCode.error_content(:user_password_error)
           end
