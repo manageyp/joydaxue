@@ -17,6 +17,7 @@
 
 class User < ActiveRecord::Base
   has_one :user_role
+  has_one :user_token
   has_many :user_devices
 
   attr_accessor :captcha_number

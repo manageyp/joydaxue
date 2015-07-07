@@ -25,4 +25,16 @@ FactoryGirl.define do
     password '116763115b3fbf99b12cc38b388fc825' # 123456
     password_salt 'MfneSBCopBcjR4rxHuxxRQhh'
   end
+
+  factory :user_alice, class:User do
+    id 2
+    name "alice"
+    email "alice@qq.com"
+    cellphone "18899999999"
+    sex 0
+    status 0
+    memo "enjoy shoopping"
+    password '116763115b3fbf99b12cc38b388fc825' # 123456
+    password_salt 'MfneSBCopBcjR4rxHuxxRQhh'
+  end
 end
