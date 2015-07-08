@@ -156,7 +156,6 @@ module V1
         post "/v1/users/update_profile", token: "expired token", name: @user.name
         response.status.should == 201
         resp_data = JSON.parse(response.body)
-        puts resp_data.inspect
         resp_data["status"].should == "1004"
       end
 
@@ -181,6 +180,39 @@ module V1
         resp_data["status"].should == "1025"
       end
     end
+
+    describe "POST api /v1/users/forgot_password" do
+      it "should do users forgot_password" do
+        post "/v1/users/forgot_password", cellphone: @user.cellphone
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("0000")
+        expect(resp_data["data"]["success"]).to eq(true)
+      end
+
+      it "should not do users forgot_password with blank cellphone" do
+        post "/v1/users/forgot_password"
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("1021")
+      end
+
+      it "should not users forgot_password with wrong cellphone" do
+        post "/v1/users/forgot_password", cellphone: "12345678912"
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("1024")
+      end
+
+      it "should not do users forgot_password because reach limit count" do
+        Captcha.stub(:valid_today_count?) { false }
+        post "/v1/users/forgot_password", cellphone: @user.cellphone
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("1020")
+      end
+    end
+
 
   end
 end

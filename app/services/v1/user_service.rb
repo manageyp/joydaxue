@@ -96,6 +96,23 @@ module V1
         end
       end
 
+      def forgot_password(cellphone)
+        return ErrorCode.error_content(:cellphone_is_blank) if cellphone.blank?
+
+        user = User.fetch_by_cellphone(cellphone)
+        if user.present?
+          captcha = Captcha.build_captcha(cellphone)
+          if captcha
+            UserWorker.delay.deliver_cellphone_captcha(captcha)
+            [captcha, {success: true}]
+          else
+            ErrorCode.error_content(:captcha_limit_count)
+          end
+        else
+          ErrorCode.error_content(:cellphone_not_existed)
+        end
+      end
+
     end
 
   end

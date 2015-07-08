@@ -15,7 +15,7 @@ class Captcha < ActiveRecord::Base
 
   EXPIRED_TIME = 600  # 验证码过期时间 60 minutes
   SEND_INTERVAL = 30  # 发送验证码间隔 30 seconds
-  MAX_DAY_SENDED_COUNTER = 20 # 验证码单日发送上限 10
+  MAX_DAY_SENDED_COUNTER = 50 # 验证码单日发送上限 10
   CAPTCHA_TYPES = {
     login: 'login' # 登录验证码
   }
