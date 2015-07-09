@@ -37,7 +37,7 @@ module V1
       desc '用户注册接口'
       params do
         optional :cellphone, type: String, desc: "用户的手机号"
-        optional :code, type: String, desc: "手机验证码"
+        optional :code, type: String, desc: "手机短信的验证码"
         optional :password, type: String, desc: "用户密码, 6至16位字符"
       end
 
@@ -90,12 +90,28 @@ module V1
       post '/forgot_password' do
         result, content = V1::UserService.forgot_password(params[:cellphone])
         if result
-         render_json(data: content)
+          render_json(data: content)
         else
-        render_error(content)
+          render_error(content)
         end
       end
 
+      desc '用户修改密码接口'
+      params do
+        optional :cellphone, type: String, desc: "用户的手机号"
+        optional :code, type: String, desc: "手机短信的验证码"
+        optional :password, type: String, desc: "用户密码, 6至16位字符"
+        optional :confirm_password, type: String, desc: "用户确认密码, 6至16位字符"
+      end
+
+      post '/reset_password' do
+        result, content = V1::UserService.reset_password(params)
+        if result
+          render_json(data: content)
+        else
+          render_error(content)
+        end
+      end
 
     end
   end

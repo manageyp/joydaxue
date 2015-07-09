@@ -13,9 +13,7 @@ module V1
       end
 
       def send_captcha(cellphone)
-        if cellphone.blank?
-          return ErrorCode.error_content(:cellphone_is_blank)
-        end
+        return ErrorCode.error_content(:cellphone_is_blank) if cellphone.blank?
 
         if !Util::ValidateUtil.valid_cellphone?(cellphone)
           ErrorCode.error_content(:cellphone_format_invalid)
@@ -33,31 +31,21 @@ module V1
       end
 
       def signup(params)
-        captcha = Captcha.fetch_code(params[:cellphone])
-        if captcha.present?
-          if captcha.expired?
-            ErrorCode.error_content(:captcha_is_expired)
-          elsif !captcha.valid_code?(params[:code])
-            ErrorCode.error_content(:captcha_is_invalid)
-          else
-            if !Util::ValidateUtil.valid_pwd?(params[:password])
-              ErrorCode.error_content(:password_is_invalid)
-            elsif !Util::ValidateUtil.valid_pwd_length?(params[:password])
-              ErrorCode.error_content(:password_length_invalid)
-            else
-              user = User.register_by_cellphone(captcha, params[:password])
-              [user, V1::UserWrapper.user_detail(user)]
-            end
-          end
+        captcha, content = validate_captcha(params[:cellphone], params[:code])
+        return [captcha, content] unless captcha
+
+        if !Util::ValidateUtil.valid_pwd?(params[:password])
+          ErrorCode.error_content(:password_is_invalid)
+        elsif !Util::ValidateUtil.valid_pwd_length?(params[:password])
+          ErrorCode.error_content(:password_length_invalid)
         else
-          ErrorCode.error_content(:cellphone_not_existed)
+          user = User.register_by_cellphone(captcha, params[:password])
+          [user, V1::UserWrapper.user_detail(user)]
         end
       end
 
       def signin(params)
-        if params[:cellphone].blank?
-          return ErrorCode.error_content(:cellphone_is_blank)
-        end
+        return ErrorCode.error_content(:cellphone_is_blank) if params[:cellphone].blank?
 
         user = User.fetch_by_cellphone(params[:cellphone])
         if user.present?
@@ -112,6 +100,39 @@ module V1
           ErrorCode.error_content(:cellphone_not_existed)
         end
       end
+
+      def reset_password(params)
+        captcha, content = validate_captcha(params[:cellphone], params[:code])
+        return [captcha, content] unless captcha
+
+        if !Util::ValidateUtil.valid_pwd?(params[:password])
+          ErrorCode.error_content(:password_is_invalid)
+        elsif !Util::ValidateUtil.valid_pwd_length?(params[:password])
+          ErrorCode.error_content(:password_length_invalid)
+        elsif params[:password] != params[:confirm_password]
+          ErrorCode.error_content(:confirm_password_invalid)
+        else
+          user = User.reset_password(captcha, params[:password])
+          [user, V1::UserWrapper.user_detail(user, true)]
+        end
+      end
+
+      private
+
+        def validate_captcha(cellphone, code)
+          captcha = Captcha.fetch_code(cellphone)
+          if captcha.present?
+            if captcha.expired?
+              ErrorCode.error_content(:captcha_is_expired)
+            elsif !captcha.valid_code?(code)
+              ErrorCode.error_content(:captcha_is_invalid)
+            else
+              [captcha, true]
+            end
+          else
+            ErrorCode.error_content(:cellphone_not_existed)
+          end
+        end
 
     end
 

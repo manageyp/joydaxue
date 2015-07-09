@@ -92,6 +92,16 @@ class User < ActiveRecord::Base
       where(cellphone: cellphone).first
     end
 
+    def reset_password(captcha, password)
+      user = fetch_by_cellphone(captcha.cellphone)
+      User.transaction do
+        user.set_password(password)
+        user.save
+        captcha.destroy
+      end
+      user
+    end
+
     def register_by_cellphone(captcha, password)
       user = User.new
       User.transaction do

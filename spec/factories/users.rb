@@ -18,7 +18,7 @@ FactoryGirl.define do
     id 1
     name "henry"
     email "manageyp@gmail.com"
-    cellphone "18888888888"
+    cellphone "15000000000"
     sex 1
     status 0
     memo "enjoy coding"
@@ -30,7 +30,7 @@ FactoryGirl.define do
     id 2
     name "alice"
     email "alice@qq.com"
-    cellphone "18899999999"
+    cellphone "15022222222"
     sex 0
     status 0
     memo "enjoy shoopping"

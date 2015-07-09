@@ -10,6 +10,8 @@ module V1
       @user_alice = create(:user_alice)
       @user_token = create(:user_token)
       @captcha = create(:captcha)
+      @reset_captcha = create(:reset_captcha)
+      @new_cellphone = "15099999999"
     end
 
 
@@ -71,7 +73,7 @@ module V1
       end
 
       it "should not users signup wrong cellphone" do
-        post "/v1/users/signup", cellphone: @user.cellphone,
+        post "/v1/users/signup", cellphone: @new_cellphone,
           code: @captcha.code, password: '123456'
         response.status.should == 201
         resp_data = JSON.parse(response.body)
@@ -181,6 +183,7 @@ module V1
       end
     end
 
+
     describe "POST api /v1/users/forgot_password" do
       it "should do users forgot_password" do
         post "/v1/users/forgot_password", cellphone: @user.cellphone
@@ -213,6 +216,49 @@ module V1
       end
     end
 
+
+    describe "POST api /v1/users/reset_password" do
+      it "should do users reset_password" do
+        post "/v1/users/reset_password", cellphone: @reset_captcha.cellphone,
+          code: @reset_captcha.code, password: '123456', confirm_password: '123456'
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("0000")
+        expect(resp_data["data"]["user_id"]).to eq(@user.id)
+      end
+
+      it "should not users reset_password wrong cellphone" do
+        post "/v1/users/reset_password", cellphone: @user_alice.cellphone,
+          code: @reset_captcha.code
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("1024")
+      end
+
+      it "should not do users reset_password wrong code" do
+        post "/v1/users/reset_password", cellphone: @reset_captcha.cellphone,
+          code: 'wrong'
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("1013")
+      end
+
+      it "should not do users reset_password invalid password" do
+        post "/v1/users/reset_password", cellphone: @reset_captcha.cellphone,
+          code: @reset_captcha.code, password: '1'
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("1016")
+      end
+
+      it "should not do users reset_password invalid confirm password" do
+        post "/v1/users/reset_password", cellphone: @reset_captcha.cellphone,
+          code: @reset_captcha.code, password: '123456', confirm_password: '123'
+        response.status.should == 201
+        resp_data = JSON.parse(response.body)
+        expect(resp_data["status"]).to eq("1017")
+      end
+    end
 
   end
 end
