@@ -25,6 +25,7 @@ module V1
           cache_data = school_detail(school)
           CacheService.set_week_expires(cache_key, cache_data)
         end
+        cache_data
       end
 
       def schools_data(schools)
