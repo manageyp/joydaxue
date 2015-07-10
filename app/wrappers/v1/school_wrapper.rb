@@ -18,11 +18,20 @@ module V1
         }
       end
 
+      def school_cache(school)
+        cache_key = "school_wrapper_#{school.id}_#{school.updated_at.to_i}"
+        cache_data = CacheService.get(cache_key)
+        unless cache_data
+          cache_data = school_detail(school)
+          CacheService.set_week_expires(cache_key, cache_data)
+        end
+      end
+
       def schools_data(schools)
         ret = []
         if has_size?(schools)
           schools.each do |school|
-            ret << school_detail(school)
+            ret << school_cache(school)
           end
         end
         ret
