@@ -5,12 +5,24 @@ module V1
 
     class << self
 
-      def favorite_info(user_id, favorite_id, is_favorite = true)
-        ret = { favorite_id: favorite_id, is_favorite: is_favorite }
+      def favorite_info(favorite_id, is_favorite = true)
+        { favorite_id: favorite_id, is_favorite: is_favorite }
+      end
 
-        user_token = UserToken.fetch_token(user_id)
-        ret[:token] = user_token.token if user_token
+      def favorite_detail(favorite)
+        ret = { favorite_id: favorite.id, created_at: favorite.created_at }
+        school = favorite.detail
+        if school.present?
+          ret[:detail] = V1::SchoolWrapper.school_detail(school)
+        end
+        ret
+      end
 
+      def favorites_data(favorites)
+        ret = []
+        favorites.each do |favorite|
+          ret << favorite_detail(favorite)
+        end
         ret
       end
 

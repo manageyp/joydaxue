@@ -7,7 +7,7 @@ module V1
       desc '获取学校列表接口'
       params do
         optional :token, type: String, desc: "用户的唯一标识"
-        optional :page, type: String, desc: "客户端话题评论的最小更新时间"
+        optional :page, type: String, desc: "客户端学校数据的最小更新时间"
       end
 
       get '/' do

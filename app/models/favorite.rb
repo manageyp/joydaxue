@@ -11,6 +11,7 @@
 
 class Favorite < ActiveRecord::Base
   belongs_to :user
+  belongs_to :detail, polymorphic: true
 
   class << self
 
@@ -28,6 +29,14 @@ class Favorite < ActiveRecord::Base
       detail_id = favorite_id.to_s.split(":")[1]
       where(user_id: user_id, detail_id: detail_id,
         detail_type: detail_type).delete_all
+    end
+
+    def list_user_favorites(user_id, min_created_at, page = 1, per_page = 20)
+      query = where(user_id: user_id)
+      if min_created_at.present?
+        query = query.where("created_at < ?", min_created_at)
+      end
+      query.page(page).per(per_page).order("created_at desc")
     end
 
   end
