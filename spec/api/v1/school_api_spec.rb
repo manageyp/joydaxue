@@ -15,8 +15,9 @@ module V1
         response.status.should == 200
         resp_data = JSON.parse(response.body)
         resp_data["status"].should == "0000"
-        resp_data["data"][0]["school_id"].should_not be_nil
-        resp_data["data"][0]["name"].should_not be_nil
+        resp_data["data"][0]["school_id"].should == @school.id
+        resp_data["data"][0]["name"].should == @school.name
+        resp_data["pagination"]["current_page"].should == 1
       end
     end
 
