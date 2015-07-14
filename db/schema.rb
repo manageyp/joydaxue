@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710013443) do
+ActiveRecord::Schema.define(version: 20150714025813) do
 
   create_table "captchas", force: true do |t|
     t.string   "captcha_type",             null: false
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 20150710013443) do
 
   add_index "favorites", ["detail_type", "detail_id"], name: "index_favorites_on_detail_type_and_detail_id", unique: true, using: :btree
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
+  create_table "follows", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "to_user_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "follows", ["user_id", "to_user_id"], name: "index_follows_on_user_id_and_to_user_id", unique: true, using: :btree
 
   create_table "permissions", force: true do |t|
     t.integer  "role_id",         null: false
