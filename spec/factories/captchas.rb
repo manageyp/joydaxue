@@ -20,6 +20,8 @@ FactoryGirl.define do
     cellphone "15033333333"
     send_count 1
     code "1234"
+    created_at 5.minutes.ago
+    updated_at 5.minutes.ago
   end
 
   factory :reset_captcha, class:Captcha do
@@ -28,5 +30,7 @@ FactoryGirl.define do
     cellphone "15000000000"
     send_count 1
     code "5678"
+    created_at 5.minutes.ago
+    updated_at 5.minutes.ago
   end
 end
