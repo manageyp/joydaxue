@@ -109,7 +109,7 @@ module V1
       else
         user_token = UserToken.verify_token(params[:token])
         if user_token
-          params[:user_id] = user_token.user_id
+          params[:current_user_id] = user_token.user_id
         else
           content = ErrorCode.error_value(:user_token_expired)
           error!(render_error(content), correct_http_status)
@@ -121,7 +121,7 @@ module V1
       if params[:token].present?
         user_token = UserToken.verify_token(params[:token])
         if user_token
-          params[:user_id] = user_token.user_id
+          params[:current_user_id] = user_token.user_id
         end
       end
     end

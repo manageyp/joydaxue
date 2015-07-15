@@ -60,7 +60,7 @@ module V1
       end
 
       def update_profile(params)
-        current_user = User.fetch_by_id(params[:user_id])
+        current_user = User.fetch_by_id(params[:current_user_id])
 
         if params[:name].present?
           unless Util::ValidateUtil.valid_name?(params[:name])

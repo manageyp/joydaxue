@@ -14,7 +14,7 @@ class UserRole < ActiveRecord::Base
   belongs_to :role
 
   def refresh_user_role(params)
-    self.user_id = params[:user_id] if params[:user_id].present?
+    self.user_id = params[:current_user_id] if params[:current_user_id].present?
     self.role_id = params[:role_id] if params[:role_id].present?
     self.save
   end
