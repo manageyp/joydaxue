@@ -16,11 +16,7 @@ module V1
       end
 
       def list_favorites(params)
-        min_created_at = if params[:page].to_i == 1
-          ""
-        else
-          Util::DateUtil.remove_timezone(params[:page])
-        end
+        min_created_at = Util::DateUtil.pagination_datetime(params[:page])
         favorites = Favorite.list_user_favorites(params[:current_user_id], min_created_at)
         [favorites, V1::FavoriteWrapper.favorites_data(favorites)]
       end

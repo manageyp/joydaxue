@@ -28,6 +28,14 @@ module Util
         end
       end
 
+      def pagination_datetime(page)
+        if page.to_i == 1
+          ""
+        else
+          remove_timezone(page)
+        end
+      end
+
     end
 
   end
