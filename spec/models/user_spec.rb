@@ -55,7 +55,7 @@ RSpec.describe User, :type => :model do
 
   describe "#refresh_user" do
     it "should refresh user name" do
-      params = { name: 'queenie' }
+      params = { name: 'alice' }
       user.refresh_user(params)
       expect(user.name).to eq(params[:name])
     end
@@ -65,7 +65,7 @@ RSpec.describe User, :type => :model do
   describe ".build_user" do
     it "should build user succeed" do
       expect {
-        params = { name: 'queenie', email: 'xiaoyu@qq.com', cellphone: '18888888888' }
+        params = { name: 'alice', email: 'alice@qq.com', cellphone: '18888888888' }
         new_user = User.build_user(params)
 
         expect(new_user.captcha_number).not_to eq(nil)
