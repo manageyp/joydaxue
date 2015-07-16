@@ -39,6 +39,7 @@ class ErrorCode
 
     username_existed:              ['1025', '用户名已存在'],
     user_update_error:             ['1026', '用户信息保存失败，请稍后重试'],
+    user_cannot_follow_self:       ['1027', '用户不能关注自己'],
 
     school_not_existed:            ['2001', '学校不存在']
   }
