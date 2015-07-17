@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714025813) do
+ActiveRecord::Schema.define(version: 20150716020019) do
 
   create_table "captchas", force: true do |t|
     t.string   "captcha_type",             null: false
@@ -176,6 +176,8 @@ ActiveRecord::Schema.define(version: 20150714025813) do
     t.string   "email"
     t.string   "cellphone"
     t.integer  "sex"
+    t.integer  "follows_count", default: 0
+    t.integer  "fans_count",    default: 0
     t.integer  "status",        default: 0
     t.string   "memo"
     t.string   "password"
