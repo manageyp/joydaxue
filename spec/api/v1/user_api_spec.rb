@@ -12,6 +12,8 @@ module V1
       @captcha = create(:captcha)
       @reset_captcha = create(:reset_captcha)
       @new_cellphone = "15099999999"
+      create(:follow)
+      create(:pair_follow)
     end
 
 
@@ -31,6 +33,66 @@ module V1
         resp_data["data"]["user_id"].should_not be_nil
         resp_data["data"]["name"].should_not be_nil
         resp_data["data"]["token"].should_not be_nil
+      end
+    end
+
+
+    describe "GET api /v1/users/:id/follows" do
+      it "should get user follows with guest" do
+        get "/v1/users/#{@user.id}/follows"
+        response.status.should == 200
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "0000"
+        resp_data["data"][0]["is_fans"] == false
+        resp_data["data"][0]["user_id"] == @user.id
+        resp_data["pagination"]["current_page"].should == 1
+      end
+
+      it "should get user follows with token" do
+        get "/v1/users/#{@user.id}/follows", nil, { token: @user_token.token }
+        response.status.should == 200
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "0000"
+        resp_data["data"][0]["is_fans"] == true
+        resp_data["data"][0]["user_id"] == @user.id
+        resp_data["pagination"]["current_page"].should == 1
+      end
+
+      it "should get error with wrong user_id" do
+        get "/v1/users/9999/follows", nil, { token: @user_token.token }
+        response.status.should == 200
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "1019"
+      end
+    end
+
+
+    describe "GET api /v1/users/:id/fans" do
+      it "should get user fans with guest" do
+        get "/v1/users/#{@user.id}/fans"
+        response.status.should == 200
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "0000"
+        resp_data["data"][0]["is_fans"] == false
+        resp_data["data"][0]["user_id"] == @user_alice.id
+        resp_data["pagination"]["current_page"].should == 1
+      end
+
+      it "should get user fans with token" do
+        get "/v1/users/#{@user.id}/fans", nil, { token: @user_token.token }
+        response.status.should == 200
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "0000"
+        resp_data["data"][0]["is_fans"] == true
+        resp_data["data"][0]["user_id"] == @user_alice.id
+        resp_data["pagination"]["current_page"].should == 1
+      end
+
+      it "should get error with wrong user_id" do
+        get "/v1/users/999/fans", nil, { token: @user_token.token }
+        response.status.should == 200
+        resp_data = JSON.parse(response.body)
+        resp_data["status"].should == "1019"
       end
     end
 

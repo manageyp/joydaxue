@@ -14,4 +14,10 @@ FactoryGirl.define do
     user_id 1
     to_user_id 2
   end
+
+  factory :pair_follow, class:Follow do
+    id 2
+    user_id 2
+    to_user_id 1
+  end
 end
