@@ -7,6 +7,8 @@
 #  email        :string(255)      DEFAULT null   邮箱
 #  cellphone    :string(255)      DEFAULT null   手机号
 #  sex          :integer                     性别
+#  follows_count    :integer(11)  default(0) 用户关注人数
+#  fans_count       :integer(11)  default(0) 用户粉丝人数
 #  status       :integer          default(0) 状态
 #  memo         :string(255)                 备注
 #  password         :string(255)             用户密码
@@ -70,6 +72,20 @@ class User < ActiveRecord::Base
   end
 
   class << self
+
+    def increase_follows_count(current_user_id, to_user_id)
+      current_user = fetch_by_id(current_user_id)
+      to_user = fetch_by_id(to_user_id)
+      current_user.update_attributes(follows_count: current_user.follows_count + 1)
+      to_user.update_attributes(fans_count: to_user.fans_count + 1)
+    end
+
+    def decrease_follows_count(current_user_id, to_user_id)
+      current_user = fetch_by_id(current_user_id)
+      to_user = fetch_by_id(to_user_id)
+      current_user.update_attributes(follows_count: current_user.follows_count - 1) if current_user.follows_count > 0
+      to_user.update_attributes(fans_count: to_user.fans_count - 1) if to_user.fans_count > 0
+    end
 
     def fetch_by_id(id)
       record = select(:id, :updated_at).where(id: id).first
