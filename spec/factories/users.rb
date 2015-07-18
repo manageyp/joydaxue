@@ -7,6 +7,8 @@
 #  email        :string(255)      not null
 #  cellphone    :string(255)      not null
 #  sex          :integer
+#  follows_count    :integer(11)  default(0) 用户关注人数
+#  fans_count       :integer(11)  default(0) 用户粉丝人数
 #  status       :integer          default(0)
 #  memo         :string(255)
 #  created_at   :datetime
