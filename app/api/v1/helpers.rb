@@ -5,24 +5,6 @@ module V1
 
     include Util::GrapeCache
 
-    def set_pagination(records)
-      if records.present?
-        ret = {
-          total_count: records.total_count,
-          per_page: records.limit_value,
-          current_page: records.current_page,
-          total_pages: records.total_pages,
-          prev_page: records.prev_page || ""
-        }
-
-        if records.next_page
-          ret[:next_page] = records.next_page
-        end
-
-        ret
-      end
-    end
-
     def set_datetime_pagination(records, datetime)
       if records.present?
         ret = {
@@ -51,15 +33,6 @@ module V1
       message = route.route_description || ''
       data = content || {}
       pagination = set_datetime_pagination(records, datetime)
-
-      { status: status, message: message, data: data, pagination: pagination }
-    end
-
-    def render_with_pagination(records, content)
-      status = '0000'
-      message = route.route_description || ''
-      data = content || {}
-      pagination = set_pagination(records)
 
       { status: status, message: message, data: data, pagination: pagination }
     end

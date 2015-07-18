@@ -37,7 +37,7 @@ module V1
       get '/' do
         validate_user_token
         records, content = V1::FavoriteService.list_favorites(params)
-        render_with_pagination(records, content)
+        render_datetime_pagination(records, content)
       end
     end
   end

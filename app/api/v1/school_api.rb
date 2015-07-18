@@ -13,7 +13,7 @@ module V1
       get '/' do
         records, content = V1::SchoolService.list_schools(params)
         if records
-          render_with_pagination(records, content)
+          render_datetime_pagination(records, content, :updated_at)
         else
           render_error(content)
         end

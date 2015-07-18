@@ -6,8 +6,8 @@ module V1
     class << self
 
       def list_schools(params)
-        min_created_at = Util::DateUtil.pagination_datetime(params[:page])
-        schools = School.paginate_schools(min_created_at)
+        min_updated_at = Util::DateUtil.pagination_datetime(params[:page])
+        schools = School.paginate_schools(min_updated_at)
         [schools, V1::SchoolWrapper.schools_data(schools)]
       end
 
