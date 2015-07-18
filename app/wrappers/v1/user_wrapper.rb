@@ -3,6 +3,14 @@ module V1
 
     class << self
 
+      def owner_info(user)
+        {
+          user_id: user.id,
+          name: user.name,
+          sex: user.sex
+        }
+      end
+
       def user_detail(user, force_refresh = false)
         ret = { user_id: user.id,
           name: user.name,

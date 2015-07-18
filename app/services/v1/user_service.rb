@@ -12,6 +12,31 @@ module V1
         end
       end
 
+      def get_user_follows(params)
+        user = User.fetch_by_id(params[:id])
+        if user.present?
+          min_created_at = Util::DateUtil.pagination_datetime(params[:page])
+          follows = Follow.paginate_follows(user.id, min_created_at)
+          [follows,
+            V1::FollowWrapper.follows_data(follows, params[:current_user_id])]
+        else
+          ErrorCode.error_content(:user_not_existed)
+        end
+      end
+
+      def get_user_fans(params)
+        user = User.fetch_by_id(params[:id])
+        if user.present?
+          min_created_at = Util::DateUtil.pagination_datetime(params[:page])
+          fans = Follow.paginate_fans(user.id, min_created_at)
+          [fans,
+            V1::FollowWrapper.fans_data(fans, params[:current_user_id])]
+        else
+          ErrorCode.error_content(:user_not_existed)
+        end
+
+      end
+
       def send_captcha(cellphone)
         return ErrorCode.error_content(:cellphone_is_blank) if cellphone.blank?
 

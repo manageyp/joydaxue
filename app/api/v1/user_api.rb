@@ -20,6 +20,40 @@ module V1
         end
       end
 
+      desc '获取用户的关注列表'
+      params do
+        optional :id, type: Integer, desc: "User ID"
+        optional :token, type: String, desc: "用户的唯一标识"
+        optional :page, type: String, desc: "用户关注数据的最小创建时间"
+      end
+
+      get '/:id/follows' do
+        parse_user_token
+        records, content = V1::UserService.get_user_follows(params)
+        if records
+          render_datetime_pagination(records, content)
+        else
+          render_error(content)
+        end
+      end
+
+      desc '获取用户的粉丝列表'
+      params do
+        optional :id, type: Integer, desc: "User ID"
+        optional :token, type: String, desc: "用户的唯一标识"
+        optional :page, type: String, desc: "用户粉丝数据的最小创建时间"
+      end
+
+      get '/:id/fans' do
+        parse_user_token
+        records, content = V1::UserService.get_user_fans(params)
+        if records
+          render_datetime_pagination(records, content)
+        else
+          render_error(content)
+        end
+      end
+
       desc ' 发送用户注册验证码接口'
       params do
         optional :cellphone, type: String, desc: "用户的手机号"
