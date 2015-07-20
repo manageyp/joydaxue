@@ -39,7 +39,7 @@ class Follow < ActiveRecord::Base
         Follow.transaction do
           new_follow = create(user_id: current_user_id, to_user_id: to_user_id)
           User.increase_follows_count(current_user_id, to_user_id)
-          # Notification.build_friendship_follow_notice(new_follow.id)
+          Message.build_follow_message(new_follow)
         end
       end
     end
@@ -49,7 +49,7 @@ class Follow < ActiveRecord::Base
         follow_result = where(user_id: current_user_id, to_user_id: to_user_id).first
         if follow_result.present?
           User.decrease_follows_count(current_user_id, to_user_id)
-          # Notification.delete_former_notices('follow', follow_result.id)
+          Message.delete_unreads('Follow', follow_result.id)
           follow_result.destroy
         end
       end
