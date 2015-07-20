@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716020019) do
+ActiveRecord::Schema.define(version: 20150720014640) do
 
   create_table "captchas", force: true do |t|
     t.string   "captcha_type",             null: false
@@ -53,6 +53,21 @@ ActiveRecord::Schema.define(version: 20150716020019) do
   end
 
   add_index "follows", ["user_id", "to_user_id"], name: "index_follows_on_user_id_and_to_user_id", unique: true, using: :btree
+
+  create_table "messages", force: true do |t|
+    t.integer  "sender_id",               null: false
+    t.integer  "receiver_id",             null: false
+    t.string   "detail_type",             null: false
+    t.integer  "detail_id",               null: false
+    t.string   "description"
+    t.integer  "status",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["detail_type"], name: "index_messages_on_detail_type", using: :btree
+  add_index "messages", ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
+  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
 
   create_table "permissions", force: true do |t|
     t.integer  "role_id",         null: false
