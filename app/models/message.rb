@@ -51,13 +51,57 @@ class Message < ActiveRecord::Base
         detail_type: 'Follow', detail_id: new_follow.id })
       message.save
       # TODO
-      # increase_unread_count
+      increase_unread_count(new_follow.to_user_id, 'Follow')
       # MessageWorker.delay.xinge_user_follow_push(message.id)
     end
 
     def delete_unreads(detail_type, detail_id)
-      where(detail_type: detail_type, detail_id: detail_id,
-        status: Message::STATUS_UNREAD).update_all(status: Message::STATUS_DELETE)
+      messages = where(detail_type: detail_type, detail_id: detail_id,
+        status: Message::STATUS_UNREAD).all
+      messages.each do |message|
+        decrease_unread_count(message.receiver_id, message.detail_type)
+        message.set_deleted
+      end
+    end
+
+    def increase_unread_count(user_id, item_key)
+      unread_value = get_unread_count(user_id)
+      unread_value[item_key.to_s] += 1
+      set_unread_count(user_id, unread_value)
+    end
+
+    def decrease_unread_count(user_id, item_key)
+      unread_value = get_unread_count(user_id)
+      item_count = unread_value[item_key.to_s]
+      if item_count > 0
+        unread_value[item_key.to_s] -= 1
+        set_unread_count(user_id, unread_value)
+      end
+    end
+
+    def reset_unread_count(user_id, item_key)
+      unread_value = get_unread_count(user_id)
+      unread_value[item_key.to_s] = 0
+      set_unread_count(user_id, unread_value)
+    end
+
+    def get_unread_count(user_id)
+      unread_value = Util::RedisUtil.get(message_key(user_id))
+      if unread_value.present?
+        unread_value = JSON.parse(unread_value)
+      else
+        unread_value = { "Follow" => 0 }
+        set_unread_count(user_id, unread_value)
+      end
+      unread_value
+    end
+
+    def set_unread_count(user_id, value)
+      Util::RedisUtil.set(message_key(user_id), value.to_json)
+    end
+
+    def message_key(user_id)
+      "tibet:message:unread:user:#{user_id}"
     end
 
   end
