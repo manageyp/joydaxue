@@ -17,6 +17,16 @@ FactoryGirl.define do
   factory :message do
     id 1
     sender_id 1
+    receiver_id 2
+    detail_type "Follow"
+    detail_id 1
+    description "New follower"
+    status 0
+  end
+
+  factory :pair_message, class:Message do
+    id 2
+    sender_id 2
     receiver_id 1
     detail_type "Follow"
     detail_id 1
