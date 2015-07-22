@@ -60,10 +60,10 @@ class Message < ActiveRecord::Base
       message = Message.new({ sender_id: follow.user_id,
         receiver_id: follow.to_user_id,
         detail_type: 'Follow', detail_id: follow.id })
-      message.save
-      # TODO
-      increase_unread_count(follow.to_user_id, 'Follow')
-      # MessageWorker.delay.xinge_user_follow_push(message.id)
+      if message.save
+        increase_unread_count(follow.to_user_id, 'Follow')
+        MessageWorker.delay.deliver_follow_message(message.id)
+      end
     end
 
     def delete_unreads(detail_type, detail_id)
