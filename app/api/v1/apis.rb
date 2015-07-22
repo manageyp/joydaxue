@@ -8,6 +8,7 @@ module V1
       api.mount V1::SchoolApi
       api.mount V1::FavoriteApi
       api.mount V1::FollowApi
+      api.mount V1::MessageApi
     end
 
   end

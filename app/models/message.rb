@@ -5,7 +5,7 @@
 #  id           :integer          not null, primary key
 #  sender_id    :integer          not null  消息发送者 ID
 #  receiver_id  :integer          not null  消息接收者 ID
-#  detail_type  :string(255)      not null  消息 detail 类型
+#  detail_type  :string(255)      not null  消息 detail 类型: Follow 用户关注
 #  detail_id    :integer          not null  消息 detail ID
 #  description  :string(255)                消息简介
 #  status       :integer                    消息的状态
@@ -17,6 +17,8 @@ class Message < ActiveRecord::Base
   belongs_to :sender, class_name: "User", foreign_key: "sender_id"
   belongs_to :receiver, class_name: "User", foreign_key: "receiver_id"
   belongs_to :detail, polymorphic: true
+
+  DETAIL_TYPES = { 'Follow' => 'Follow' }
 
   STATUS_UNREAD = 0
   STATUS_READ = 1
@@ -45,13 +47,22 @@ class Message < ActiveRecord::Base
 
   class << self
 
+    def list_user_messages(receiver_id, min_created_at, page = 1, per_page = 20)
+      query = where(receiver_id: receiver_id).where(
+        status: [Message::STATUS_READ, Message::STATUS_UNREAD])
+      if min_created_at.present?
+        query = query.where("created_at < ?", min_created_at)
+      end
+      query.page(page).per(per_page).order("created_at desc")
+    end
+
     def build_follow_message(follow)
-      message = Message.new({ sender_id: new_follow.user_id,
-        receiver_id: new_follow.to_user_id,
-        detail_type: 'Follow', detail_id: new_follow.id })
+      message = Message.new({ sender_id: follow.user_id,
+        receiver_id: follow.to_user_id,
+        detail_type: 'Follow', detail_id: follow.id })
       message.save
       # TODO
-      increase_unread_count(new_follow.to_user_id, 'Follow')
+      increase_unread_count(follow.to_user_id, 'Follow')
       # MessageWorker.delay.xinge_user_follow_push(message.id)
     end
 

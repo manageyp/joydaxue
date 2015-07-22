@@ -41,6 +41,9 @@ class ErrorCode
     user_update_error:             ['1026', '用户信息保存失败，请稍后重试'],
     user_cannot_follow_self:       ['1027', '用户不能关注自己'],
 
+    message_not_existed:           ['1050', '用户消息不存在'],
+    message_cannot_delete:         ['1051', '您无权删除本条消息'],
+
     school_not_existed:            ['2001', '学校不存在']
   }
 
