@@ -15,4 +15,36 @@
 class UserDevice < ActiveRecord::Base
   belongs_to :user
 
+  scope :active, -> { where(status: 0) }
+
+  IOS = 'ios'
+  ANDROID = 'android'
+
+  STATUS = {
+     0 => '正常',
+     1 => '删除'
+  }
+
+  def is_ios?
+    device_type.present? && device_type == IOS
+  end
+
+  class << self
+
+    def push_device(user_id)
+      where(user_id: user_id).active.order("updated_at desc").first
+    end
+
+    def register_device(user_id, device_id, device_token)
+      device = where(user_id: user_id, device_id: device_id).first
+      if device.present?
+        device.update_attributes(device_token: device_token)
+      else
+        create(user_id: user_id, device_id: device_id,
+          device_token: device_token, device_type: UserDevice::IOS)
+      end
+    end
+
+  end
+
 end
