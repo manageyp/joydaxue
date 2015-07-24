@@ -73,6 +73,9 @@ module V1
         optional :cellphone, type: String, desc: "用户的手机号"
         optional :code, type: String, desc: "手机短信的验证码"
         optional :password, type: String, desc: "用户密码, 6至16位字符"
+        optional :device_type, type: String, desc: "客户端设备类型：ios，android"
+        optional :device_id, type: String, desc: "客户端设备 ID"
+        optional :device_token, type: String, desc: "客户端设备信鸽推送的 Token"
       end
 
       post '/signup' do
@@ -88,6 +91,9 @@ module V1
       params do
         optional :cellphone, type: String, desc: "用户的手机号"
         optional :password, type: String, desc: "用户密码, 6至16位字符"
+        optional :device_type, type: String, desc: "客户端设备类型：ios，android"
+        optional :device_id, type: String, desc: "客户端设备 ID"
+        optional :device_token, type: String, desc: "客户端设备信鸽推送的 Token"
       end
 
       post '/signin' do

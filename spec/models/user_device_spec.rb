@@ -50,7 +50,7 @@ RSpec.describe UserDevice, :type => :model do
   describe ".register_device" do
     it "should build user device" do
       expect {
-        device = UserDevice.register_device(@user.id, 'device-2', 'device-token-2')
+        device = UserDevice.register_device(@user.id, 'ios', 'device-2', 'device-token-2')
 
         expect(device.id).not_to eq(nil)
       }.to change { UserDevice.count }.by(1)

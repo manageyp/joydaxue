@@ -65,6 +65,8 @@ module V1
           ErrorCode.error_content(:password_length_invalid)
         else
           user = User.register_by_cellphone(captcha, params[:password])
+          UserWorker.delay.register_device_info(user.id, params[:device_type],
+            params[:device_id], params[:device_token])
           [user, V1::UserWrapper.user_detail(user)]
         end
       end
@@ -75,6 +77,8 @@ module V1
         user = User.fetch_by_cellphone(params[:cellphone])
         if user.present?
           if user.valid_password?(params[:password])
+            UserWorker.delay.register_device_info(user.id, params[:device_type],
+              params[:device_id], params[:device_token])
             [user, V1::UserWrapper.user_detail(user, true)]
           else
             ErrorCode.error_content(:user_password_error)
