@@ -1,0 +1,63 @@
+h1. API Version1 Documentation
+
+{{>toc}}
+
+h2. <接口通用说明>
+
+* 接口对接地址
+<pre>
+<code>
+  测试环境：api.staging.com
+
+  发布环境：api.production.com
+</code>
+</pre>
+
+* 通用错误输出: HTTP 状态码为 200
+<pre>
+<code class="javascript">
+{
+  "status": "3001",
+  "message": "用户不存在",
+  "data": {},
+  "pagination": {}
+}
+</code>
+</pre>
+
+* 分页数据参数说明
+|_.参数名              |_.字段类型              |_.说明|
+|status|字符|四位数字编号，只有“0000”代表正常，其他均为定制的错误信息|
+|message|字符|响应说明|
+|data|哈希|响应数据|
+|pagination|哈希|分页数据|
+
+* 分页数据实例
+<pre>
+<code class="javascript">
+{
+  "pagination": {
+      "total_count": 45,
+      "per_page": 15,
+      "current_page": 1,
+      "total_pages": 3,
+      "next_page": 2,
+      "prev_page": ""
+  }
+}
+</code>
+</pre>
+
+* 分页数据参数说明
+|_.参数名              |_.字段类型              |_.说明|
+|pagination.total_count|整数|数据总条数|
+|pagination.per_page|整数|每页数据显示条数|
+|pagination.current_page|整数|当前第几页|
+|pagination.total_pages|整数|数据总页数|
+|pagination.next_page|字符|下一页数，空字符串为没有下一页|
+|pagination.prev_page|字符|上一页数，空字符串为没有上一页|
+
+* 获取数据链接通配结构说明:
+** http://host/url/?page={page}&per_page={per_page}
+** page 字段: 获取第几页数据
+** per_page 字段: 控制每页数据显示条数
