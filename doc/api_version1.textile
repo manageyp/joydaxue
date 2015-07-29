@@ -67,7 +67,7 @@ h2. Resource School
 
 h3. ~/v1/schools [GET]
 
-* 功能描述: 获得所有专辑
+* 功能描述: 获取学校列表接口
 
 * 请求实例
 
@@ -125,7 +125,7 @@ h3. ~/v1/schools [GET]
 
 h3. ~/v1/schools/<id> [GET]
 
-* 功能描述: 获得专辑详细信息
+* 功能描述: 获取学校详情接口
 
 * 请求实例
 
@@ -178,3 +178,145 @@ h3. ~/v1/schools/<id> [GET]
 |data.created_at|字符|学校记录的创建时间 |
 |data.images.thumb|字符|学校的缩略图链接 |
 |data.images.image|字符|学校的原始图链接 |
+
+
+h2. Resource User
+
+h3. ~/v1/users/<id> [GET]
+
+* 功能描述: 获取用户的个人数据
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    GET /v1/users/1?token=3222b72fc04661ac1a157bcc3e18c89733
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|id|是|整数|用户的数据库 ID |
+|token|否|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": [
+            {
+                "user_id": 1,
+                "name": "爱旅行",
+                "sex": 1
+            }
+        ]
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.user_id|整数|用户的数据库 ID |
+|data.name|字符|用户的名称 |
+|data.sex|整数|用户的性别，0 为女，1 为男 |
+
+
+h3. ~/v1/users/<id>/follows [GET]
+
+* 功能描述: 获取用户的关注列表
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    GET /v1/users/1/follows?token=3222b72fc04661ac1a157bcc3e18c89733
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|id|是|整数|用户的数据库 ID |
+|token|否|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": [
+            {
+                "user_id": 2,
+                "name": "爱旅行",
+                "sex": 0,
+                "is_fans": true
+            }
+        ]
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.user_id|整数|用户的数据库 ID |
+|data.name|字符|用户的名称 |
+|data.sex|整数|用户的性别，0 为女，1 为男 |
+|data.is_fans|布尔|当前用户（登录用户，或者匿名访客），是否为所查看用户的粉丝，是为 true，否则为 false |
+
+
+
+h3. ~/v1/users/<id>/fans [GET]
+
+* 功能描述: 获取用户的粉丝列表
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    GET /v1/users/1/fans?token=3222b72fc04661ac1a157bcc3e18c89733
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|id|是|整数|用户的数据库 ID |
+|token|否|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": [
+            {
+                "user_id": 2,
+                "name": "爱旅行",
+                "sex": 0,
+                "is_fans": true
+            }
+        ]
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.user_id|整数|用户的数据库 ID |
+|data.name|字符|用户的名称 |
+|data.sex|整数|用户的性别，0 为女，1 为男 |
+|data.is_fans|布尔|当前用户（登录用户，或者匿名访客），是否为所查看用户的粉丝，是为 true，否则为 false |
