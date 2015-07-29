@@ -6,7 +6,7 @@ module V1
       def get_user_detail(params)
         user = User.fetch_by_id(params[:id])
         if user.present?
-          [user, V1::UserWrapper.user_detail(user)]
+          [user, V1::UserWrapper.owner_info(user)]
         else
           ErrorCode.error_content(:user_not_existed)
         end
