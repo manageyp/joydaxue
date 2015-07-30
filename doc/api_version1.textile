@@ -874,3 +874,137 @@ h3. ~/v1/favorites/cancel [POST]
 |_.字段名                |_.字段类型              |_.说明|
 |data.favorite_id|字符|收藏的数据库 ID，格式为：数据类型 + 数据库 ID，由服务端提供 |
 |data.is_favorite|布尔|是否为用户收藏的数据，是为 true，否为 false |
+
+
+h2. Resource Message
+
+h3. ~/v1/messages [GET]
+
+* 功能描述: 获取用户消息数据接口
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    GET /v1/messages?token=3222b72fc04661ac1a157bcc3e18c89733
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|token|是|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": {
+            "message_id": 1,
+            "created_at": "2015-07-30 10:46:06",
+            "sender": [
+                {
+                    "user_id": 1,
+                    "name": "爱西藏",
+                    "sex": 1
+                }
+            ]
+        }
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.message_id|整数|消息记录的数据库 ID |
+|data.created_at|字符|消息记录的创建时间 |
+|data.sender.user_id|整数|用户的数据库 ID |
+|data.sender.name|字符|用户的名称 |
+|data.sender.sex|整数|用户的性别，0 为女，1 为男 |
+
+
+h3. ~/v1/messages/unread [GET]
+
+* 功能描述: 获取用户未读消息状态接口
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    GET /v1/messages/unread?token=3222b72fc04661ac1a157bcc3e18c89733
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|token|是|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": {
+            "Follow": 3
+        }
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.Follow|整数|未读的用户关注产生的消息数量，大于 0 表示有未读消息 |
+
+
+h3. ~/v1/messages/delete [POST]
+
+* 功能描述: 删除用户消息接口
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    POST /v1/messages/delete
+    JSON DATA
+    {
+        "message_id": 1,
+        "token": "3222b72fc04661ac1a157bcc3e18c89733"
+    }
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|message_id|是|字符|消息记录的数据库 ID |
+|token|是|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": {
+            "success": true
+        }
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.success|布尔|true 为消息删除成功，false 为失败 |
