@@ -714,3 +714,163 @@ h3. ~/v1/follows/cancel [POST]
 * 输出参数说明
 |_.字段名                |_.字段类型              |_.说明|
 |data.success|字符|true 为取消关注用户成功，false 为失败 |
+
+
+h2. Resource Favorite
+
+h3. ~/v1/favorites [GET]
+
+* 功能描述: 获取用户收藏数据接口
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    GET /v1/favorites?token=3222b72fc04661ac1a157bcc3e18c89733
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|token|是|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": {
+            "favorite_id": 1,
+            "created_at": "2015-07-30 10:46:06",
+            "detail": [
+                {
+                    "school_id": "1",
+                    "name": "南通大学",
+                    "address": "江苏省南通市啬园路9号",
+                    "share_link": "url",
+                    "favorite_id": "school:1",
+                    "updated_at": "2015-07-28 10:46:06",
+                    "created_at": "2015-07-28 10:46:06",
+                    "images": [
+                      {
+                        "thumb": "url",
+                        "image": "url"
+                      }
+                    ]
+                }
+            ]
+        }
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.favorite_id|整数|收藏记录的数据库 ID |
+|data.created_at|字符|收藏记录的创建时间 |
+|data.detail.school_id|整数|学校的数据库 ID |
+|data.detail.name|字符|学校的名称 |
+|data.detail.address|整数|学校的地址 |
+|data.detail.share_link|字符|学校内容的分享链接 |
+|data.detail.favorite_id|字符|学校的收藏 ID |
+|data.detail.updated_at|字符|学校记录的更新时间 |
+|data.detail.created_at|字符|学校记录的创建时间 |
+|data.detail.images.thumb|字符|学校的缩略图链接 |
+|data.detail.images.image|字符|学校的原始图链接 |
+
+
+h3. ~/v1/favorites [POST]
+
+* 功能描述: 用户添加收藏接口
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    POST /v1/favorites
+    JSON DATA
+    {
+        "favorite_id": "school:1",
+        "token": "3222b72fc04661ac1a157bcc3e18c89733"
+    }
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|favorite_id|是|字符|收藏的数据，格式为：数据类型 + 数据库 ID，由服务端提供 |
+|token|是|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": {
+            "favorite_id": "school:1",
+            "is_favorite": true
+        }
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.favorite_id|字符|收藏的数据库 ID，格式为：数据类型 + 数据库 ID，由服务端提供 |
+|data.is_favorite|布尔|是否为用户收藏的数据，是为 true，否为 false |
+
+
+h3. ~/v1/favorites/cancel [POST]
+
+* 功能描述: 用户取消收藏接口
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    POST /v1/favorites/cancel
+    JSON DATA
+    {
+        "favorite_id": "school:1",
+        "token": "3222b72fc04661ac1a157bcc3e18c89733"
+    }
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|favorite_id|是|字符|收藏的数据库 ID，格式为：数据类型 + 数据库 ID，由服务端提供 |
+|token|是|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": {
+            "favorite_id": "school:1",
+            "is_favorite": false
+        }
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.favorite_id|字符|收藏的数据库 ID，格式为：数据类型 + 数据库 ID，由服务端提供 |
+|data.is_favorite|布尔|是否为用户收藏的数据，是为 true，否为 false |
