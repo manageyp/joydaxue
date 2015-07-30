@@ -624,3 +624,93 @@ h3. ~/v1/users/reset_password [POST]
 |data.user_id|整数|用户的数据库 ID |
 |data.name|字符|用户的名称 |
 |data.sex|整数|用户的性别，0 为女，1 为男 |
+
+
+h2. Resource Follow
+
+h3. ~/v1/follows [POST]
+
+* 功能描述: 关注用户接口
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    POST /v1/follows
+    JSON DATA
+    {
+        "user_id": 1,
+        "token": "3222b72fc04661ac1a157bcc3e18c89733"
+    }
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|user_id|是|字符|用户的数据库 ID |
+|token|是|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": {
+            "success": true
+        }
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.success|字符|true 为关注用户成功，false 为失败 |
+
+
+h3. ~/v1/follows/cancel [POST]
+
+* 功能描述: 取消关注用户接口
+
+* 请求实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+
+    POST /v1/follows/cancel
+    JSON DATA
+    {
+        "user_id": 1,
+        "token": "3222b72fc04661ac1a157bcc3e18c89733"
+    }
+</code>
+</pre>
+
+* 输入参数说明
+|_.参数名                |_.是否必选                |_.字段类型              |_.说明|
+|user_id|是|字符|用户的数据库 ID |
+|token|是|字符|用户的唯一标识 |
+
+* 响应实例
+
+<pre>
+<code class="javascript">
+    Content-Type: application/json
+    HTTP Status Code: 201
+    Response Data:
+    {
+        "data": {
+            "success": true
+        }
+    }
+</code>
+</pre>
+
+* 输出参数说明
+|_.字段名                |_.字段类型              |_.说明|
+|data.success|字符|true 为取消关注用户成功，false 为失败 |
