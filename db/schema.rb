@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722014600) do
+ActiveRecord::Schema.define(version: 20150730100115) do
 
   create_table "captchas", force: true do |t|
     t.string   "captcha_type",             null: false
@@ -84,6 +84,20 @@ ActiveRecord::Schema.define(version: 20150722014600) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "qqwry_ips", force: true do |t|
+    t.string   "start_long"
+    t.string   "end_long"
+    t.string   "country"
+    t.string   "location"
+    t.string   "start_ip"
+    t.string   "end_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "qqwry_ips", ["end_long"], name: "index_qqwry_ips_on_end_long", using: :btree
+  add_index "qqwry_ips", ["start_long"], name: "index_qqwry_ips_on_start_long", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -164,6 +178,19 @@ ActiveRecord::Schema.define(version: 20150722014600) do
   add_index "user_devices", ["device_id"], name: "index_user_devices_on_device_id", using: :btree
   add_index "user_devices", ["device_token"], name: "index_user_devices_on_device_token", using: :btree
   add_index "user_devices", ["user_id"], name: "index_user_devices_on_user_id", using: :btree
+
+  create_table "user_logins", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "login_type"
+    t.string   "login_ip"
+    t.string   "location"
+    t.datetime "login_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_logins", ["login_ip"], name: "index_user_logins_on_login_ip", using: :btree
+  add_index "user_logins", ["user_id"], name: "index_user_logins_on_user_id", using: :btree
 
   create_table "user_roles", force: true do |t|
     t.integer  "user_id",    null: false
