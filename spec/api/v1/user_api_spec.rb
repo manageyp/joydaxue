@@ -32,7 +32,6 @@ module V1
         resp_data["status"].should == "0000"
         resp_data["data"]["user_id"].should_not be_nil
         resp_data["data"]["name"].should_not be_nil
-        resp_data["data"]["token"].should_not be_nil
       end
     end
 
