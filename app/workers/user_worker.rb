@@ -10,10 +10,13 @@ class UserWorker
       # TODO Call Emay sms service
     end
 
-    def register_device_info(user_id, device_type, device_id, device_token)
-      user = User.where(id: user_id).first
+    def register_login_info(params)
+      user = User.where(id: params[:user_id]).first
       if user.present?
-        UserDevice.register_device(user.id, device_type, device_id, device_token)
+        UserDevice.register_device(user.id, params[:device_type],
+          params[:device_id], params[:device_token])
+        UserLogin.build_user_login(user.id, params[:real_ip],
+          params[:login_at], params[:login_type])
       end
     end
 

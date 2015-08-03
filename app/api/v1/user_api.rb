@@ -79,6 +79,7 @@ module V1
       end
 
       post '/signup' do
+        parse_real_ip
         result, content = V1::UserService.signup(params)
         if result
           render_json(data: content)
@@ -97,6 +98,7 @@ module V1
       end
 
       post '/signin' do
+        parse_real_ip
         result, content = V1::UserService.signin(params)
         if result
           render_json(data: content)
