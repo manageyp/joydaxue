@@ -22,6 +22,10 @@ class Role < ActiveRecord::Base
     STATUS_CODES[self.status]
   end
 
+  def is_active?
+    self.status == 0
+  end
+
   def refresh_role(params)
     self.name = params[:name] if params[:name].present?
     self.description = params[:description] if params[:description].present?
