@@ -1,0 +1,67 @@
+<section class="main padder">
+  <div class="row">
+    <style>
+    .table td,table th{
+      text-align:center
+      }
+    </style>
+
+    <section class="col-lg-12">
+      <div class="panel m-t">
+        <header class="panel-heading">登录IP列表</header>
+        <div class="panel-body">
+          <div class="row text-small">
+            <%= search_form_for([:admin, @search], id: 'searchForm') do |f| %>
+              <span style="margin-left:10px;">所属用户ID：</span>
+              <label>
+                <%= f.text_field(:user_id_eq, placeholder: "用户ID", class: "form-control inline" ) %>
+              </label>
+              <span style="margin-left:10px;">登录IP：</span>
+              <label>
+                <%= f.text_field(:login_ip_cont, placeholder: "登录IP", class: "form-control inline" ) %>
+              </label>
+              &nbsp;&nbsp;
+              <%= f.submit "查询", class: "btn btn-sm btn-white" %>
+            <% end %>
+          </div>
+        </div>
+
+        <table class="table table-striped m-b-none text-small">
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>用户ID</th>
+              <th>登录类型</th>
+              <th>登录IP</th>
+              <th>登录来源</th>
+              <th>登录时间</th>
+            </tr>
+          </thead>
+          <tbody>
+              <% if @records && @records.size > 0 %>
+                <% @records.each do |record| %>
+                  <tr  id="record_<%= record.id %>">
+                    <td><%= record.id %></td>
+                    <td><%= record.user_id %></td>
+                    <td><%= record.login_type %></td>
+                    <td><%= record.login_ip %></td>
+                    <td><%= record.location %></td>
+                    <td><%= chinese_datetime(record.login_at) %></td>
+                  </tr>
+                <% end -%>
+              <% else %>
+                <tr>
+                  <td rowspan="5">无结果</td>
+                </tr>
+              <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <% if @records && @records.size > 0 %>
+        <%= paginate @records %>
+      <% end %>
+
+    </section>
+  </div>
+</section>

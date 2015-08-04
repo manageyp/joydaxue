@@ -16,6 +16,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :schools, :users, :roles, :user_roles, :permissions
-    resources :user_devices
+    resources :user_devices, :user_logins
   end
 end
