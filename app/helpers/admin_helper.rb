@@ -88,7 +88,7 @@ module AdminHelper
   end
 
   def permission_checkbox(role_id, controller_name, action_name)
-    if role_id.present? && Permission.is_checked(role_id, controller_name, action_name)
+    if role_id.present? && Permission.permit_controller_action?(role_id, controller_name, action_name)
       checked = "checked"
       checked_attribute = "checked='checked'"
     end
