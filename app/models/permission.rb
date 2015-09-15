@@ -40,7 +40,7 @@ class Permission < ActiveRecord::Base
       exists?(role_id: role_id, controller_name: controller_name, action_names: 'all')
     end
 
-    def permit_all_controllers?(role_id, controller_name, action_name)
+    def permit_all_controllers?(role_id)
       exists?(role_id: role_id, controller_name: 'controllers', action_names: 'all')
     end
 
